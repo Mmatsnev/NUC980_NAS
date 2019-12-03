@@ -281,3 +281,12 @@
   Unable to open printcap file /etc/printcap for read!
 [1970/01/01 00:00:15, 0] lib/interface.c:load_interfaces(229)
   WARNING: no network interfaces found
+[1970/01/01 00:00:15, 0] smbd/server.c:main(942)
+  smbd version 3.0.37 started.
+  Copyright Andrew Tridgell and the Samba Team 1992-2009
+[1970/01/01 00:00:16, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:16, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:16, 0] lib/interface.c:load_interfaces(229)
+  WARNING: no network interfaces found
