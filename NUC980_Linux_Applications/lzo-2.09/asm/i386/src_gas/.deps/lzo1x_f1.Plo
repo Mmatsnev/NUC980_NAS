@@ -1,0 +1,4 @@
+asm/i386/src_gas/lzo1x_f1.lo: asm/i386/src_gas/lzo1x_f1.S \
+ asm/i386/src_gas/asminit.def
+
+asm/i386/src_gas/asminit.def:

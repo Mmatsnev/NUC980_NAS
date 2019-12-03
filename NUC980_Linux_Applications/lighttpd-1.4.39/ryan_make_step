@@ -1,0 +1,6 @@
+./configure --prefix=/home/ryan/wenlighttp --host arm-linux --build pentium-pc-linux --without-zlib --without-bzip2 --without-pcre --target arm-linux
+
+make
+
+make install
+
