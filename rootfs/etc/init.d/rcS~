@@ -1,0 +1,41 @@
+#!/bin/sh
+/bin/mount -t proc none /proc
+/bin/mount -t sysfs sysfs /sys
+/bin/mount -t ramfs /tmp
+/bin/mount -t ramfs /mnt
+#/bin/mkdir /mnt/pts
+#/bin/mount -t devpts devpts /dev/pts
+/bin/echo > /dev/mdev.seq
+/bin/echo /bin/mdev > /proc/sys/kernel/hotplug
+/bin/mdev -s
+
+ifconfig lo 127.0.0.1 up
+sh /etc/init.d/setip.sh
+sleep 2
+
+ntpdate 0.pool.ntp.org
+hwclock -w
+
+insmod /ts/configfs.ko
+insmod /ts/libcomposite.ko
+insmod /ts/usb_f_mass_storage.ko
+insmod /ts/g_mass_storage.ko file=/dev/mmcblk0p1 stall=0 removable=1
+#mount -o remount,rw /dev/mmcblk0p1
+sleep 2
+
+sh /etc/init.d/starthttp.sh
+sleep 2
+
+
+/bin/echo 2 > /proc/cpu/alignment
+/ts/bluenet 0xb3-5053 0xb4-5054 &
+/ts/test 5053 &
+
+#shttpd -root /mnt/mmcblk0p1/website/tongshi -ports 80&
+
+/usr/local/samba/bin/smbd -D &
+
+#/usr/sbin/crond &
+
+#/bin/gpio_demo &
+

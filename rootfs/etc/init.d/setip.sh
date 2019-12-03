@@ -1,0 +1,41 @@
+#!/bin/bash
+file=/mnt/mmcblk0p1/config 
+if [ ! -f $file ]; then
+        echo "/mnt/mmcblk0p1/config is not exit!"
+        if [ ! -f /etc/init.d/config ]; then
+                echo "/etc/init.d/config is not exit!"
+                exit
+        else
+                file=/etc/init.d/config
+        fi
+else
+        cp /mnt/mmcblk0p1/config /etc/init.d/config
+fi
+
+while read line
+do
+    #echo $line
+    if [ "$(echo $line | grep -i "IP:")" != "" ]; then
+        ip=${line##*:}
+    elif [ "$(echo $line | grep -i "Netmask:")" != "" ]; then
+        netmask=${line##*:}
+    elif [ "$(echo $line | grep -i "Gateway:")" != "" ]; then
+        gateway=${line##*:}
+    else
+        echo "Invalid setting($line)"
+    fi
+done < $file
+
+echo ip:$ip  netmask:$netmask gateway:$gateway
+if [ "$ip" == ""  -o "$netmask" == "" -o "$gateway" == "" ]; then
+        echo "invalid network parameter!"
+        exit
+fi
+
+`ifconfig eth0 $ip netmask $netmask`
+`route add default gw $gateway`
+
+file=/sbin/lighttpd.conf
+
+sed -i "s/server.bind =.*$/server.bind = \"$ip\"/g" $file
+

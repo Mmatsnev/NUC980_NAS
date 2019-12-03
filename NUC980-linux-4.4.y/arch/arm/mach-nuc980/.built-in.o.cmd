@@ -1,0 +1,1 @@
+cmd_arch/arm/mach-nuc980/built-in.o :=  arm-linux-ld -EL    -r -o arch/arm/mach-nuc980/built-in.o arch/arm/mach-nuc980/irq.o arch/arm/mach-nuc980/time.o arch/arm/mach-nuc980/dev.o arch/arm/mach-nuc980/cpu.o arch/arm/mach-nuc980/mfp.o arch/arm/mach-nuc980/mach-nuc980.o arch/arm/mach-nuc980/pm.o arch/arm/mach-nuc980/suspend.o arch/arm/mach-nuc980/sram.o 

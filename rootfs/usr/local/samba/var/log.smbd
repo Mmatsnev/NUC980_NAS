@@ -1,0 +1,283 @@
+[1970/01/01 00:00:13, 0] smbd/server.c:main(942)
+  smbd version 3.0.37 started.
+  Copyright Andrew Tridgell and the Samba Team 1992-2009
+[1970/01/01 00:00:13, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:13, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:13, 0] lib/interface.c:load_interfaces(229)
+  WARNING: no network interfaces found
+[1970/01/01 00:00:14, 0] passdb/pdb_smbpasswd.c:startsmbfilepwent(241)
+  startsmbfilepwent_internal: file /usr/local/samba/private/smbpasswd did not exist. File successfully created.
+[1970/01/01 00:00:15, 1] lib/account_pol.c:account_policy_get(286)
+  account_policy_get: tdb_fetch_uint32 failed for field 1 (min password length), returning 0
+[1970/01/01 00:00:15, 1] lib/account_pol.c:account_policy_get(286)
+  account_policy_get: tdb_fetch_uint32 failed for field 2 (password history), returning 0
+[1970/01/01 00:00:15, 1] lib/account_pol.c:account_policy_get(286)
+  account_policy_get: tdb_fetch_uint32 failed for field 3 (user must logon to change password), returning 0
+[1970/01/01 00:00:15, 1] lib/account_pol.c:account_policy_get(286)
+  account_policy_get: tdb_fetch_uint32 failed for field 4 (maximum password age), returning 0
+[1970/01/01 00:00:15, 1] lib/account_pol.c:account_policy_get(286)
+  account_policy_get: tdb_fetch_uint32 failed for field 5 (minimum password age), returning 0
+[1970/01/01 00:00:15, 1] lib/account_pol.c:account_policy_get(286)
+  account_policy_get: tdb_fetch_uint32 failed for field 6 (lockout duration), returning 0
+[1970/01/01 00:00:15, 1] lib/account_pol.c:account_policy_get(286)
+  account_policy_get: tdb_fetch_uint32 failed for field 7 (reset count minutes), returning 0
+[1970/01/01 00:00:15, 1] lib/account_pol.c:account_policy_get(286)
+  account_policy_get: tdb_fetch_uint32 failed for field 8 (bad lockout attempt), returning 0
+[1970/01/01 00:00:15, 1] lib/account_pol.c:account_policy_get(286)
+  account_policy_get: tdb_fetch_uint32 failed for field 9 (disconnect time), returning 0
+[1970/01/01 00:00:16, 1] lib/account_pol.c:account_policy_get(286)
+  account_policy_get: tdb_fetch_uint32 failed for field 10 (refuse machine password change), returning 0
+[1970/01/01 00:00:12, 0] smbd/server.c:main(942)
+  smbd version 3.0.37 started.
+  Copyright Andrew Tridgell and the Samba Team 1992-2009
+[1970/01/01 00:00:12, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:12, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:12, 0] lib/interface.c:load_interfaces(229)
+  WARNING: no network interfaces found
+[1970/01/01 00:00:12, 0] smbd/server.c:main(942)
+  smbd version 3.0.37 started.
+  Copyright Andrew Tridgell and the Samba Team 1992-2009
+[1970/01/01 00:00:12, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:12, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:12, 0] lib/interface.c:load_interfaces(229)
+  WARNING: no network interfaces found
+[1970/01/01 00:00:12, 0] smbd/server.c:main(942)
+  smbd version 3.0.37 started.
+  Copyright Andrew Tridgell and the Samba Team 1992-2009
+[1970/01/01 00:00:13, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:13, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:13, 0] lib/interface.c:load_interfaces(229)
+  WARNING: no network interfaces found
+[1970/01/01 00:00:16, 0] smbd/server.c:main(942)
+  smbd version 3.0.37 started.
+  Copyright Andrew Tridgell and the Samba Team 1992-2009
+[1970/01/01 00:00:16, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:16, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:16, 0] lib/interface.c:load_interfaces(229)
+  WARNING: no network interfaces found
+[1970/01/01 00:02:37, 0] smbd/server.c:main(942)
+  smbd version 3.0.37 started.
+  Copyright Andrew Tridgell and the Samba Team 1992-2009
+[1970/01/01 00:02:37, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:02:37, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:02:37, 0] lib/interface.c:load_interfaces(229)
+  WARNING: no network interfaces found
+[1970/01/01 00:00:16, 0] smbd/server.c:main(942)
+  smbd version 3.0.37 started.
+  Copyright Andrew Tridgell and the Samba Team 1992-2009
+[1970/01/01 00:00:16, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:16, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:16, 0] lib/interface.c:load_interfaces(229)
+  WARNING: no network interfaces found
+[1970/01/01 00:00:15, 0] smbd/server.c:main(942)
+  smbd version 3.0.37 started.
+  Copyright Andrew Tridgell and the Samba Team 1992-2009
+[1970/01/01 00:00:15, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:15, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:15, 0] lib/interface.c:load_interfaces(229)
+  WARNING: no network interfaces found
+[1970/01/01 00:00:15, 0] smbd/server.c:main(942)
+  smbd version 3.0.37 started.
+  Copyright Andrew Tridgell and the Samba Team 1992-2009
+[1970/01/01 00:00:15, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:15, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:15, 0] lib/interface.c:load_interfaces(229)
+  WARNING: no network interfaces found
+[1970/01/01 00:00:15, 0] smbd/server.c:main(942)
+  smbd version 3.0.37 started.
+  Copyright Andrew Tridgell and the Samba Team 1992-2009
+[1970/01/01 00:00:15, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:15, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:15, 0] lib/interface.c:load_interfaces(229)
+  WARNING: no network interfaces found
+[1970/01/01 00:00:15, 0] smbd/server.c:main(942)
+  smbd version 3.0.37 started.
+  Copyright Andrew Tridgell and the Samba Team 1992-2009
+[1970/01/01 00:00:16, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:16, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:16, 0] lib/interface.c:load_interfaces(229)
+  WARNING: no network interfaces found
+[1970/01/01 00:00:15, 0] smbd/server.c:main(942)
+  smbd version 3.0.37 started.
+  Copyright Andrew Tridgell and the Samba Team 1992-2009
+[1970/01/01 00:00:16, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:16, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:16, 0] lib/interface.c:load_interfaces(229)
+  WARNING: no network interfaces found
+[1970/01/01 00:00:15, 0] smbd/server.c:main(942)
+  smbd version 3.0.37 started.
+  Copyright Andrew Tridgell and the Samba Team 1992-2009
+[1970/01/01 00:00:16, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:16, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:16, 0] lib/interface.c:load_interfaces(229)
+  WARNING: no network interfaces found
+[1970/01/01 00:00:16, 0] smbd/server.c:main(942)
+  smbd version 3.0.37 started.
+  Copyright Andrew Tridgell and the Samba Team 1992-2009
+[1970/01/01 00:00:16, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:16, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:16, 0] lib/interface.c:load_interfaces(229)
+  WARNING: no network interfaces found
+[1970/01/01 00:00:15, 0] smbd/server.c:main(942)
+  smbd version 3.0.37 started.
+  Copyright Andrew Tridgell and the Samba Team 1992-2009
+[1970/01/01 00:00:15, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:15, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:15, 0] lib/interface.c:load_interfaces(229)
+  WARNING: no network interfaces found
+[1970/01/01 00:00:15, 0] smbd/server.c:main(942)
+  smbd version 3.0.37 started.
+  Copyright Andrew Tridgell and the Samba Team 1992-2009
+[1970/01/01 00:00:16, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:16, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:16, 0] lib/interface.c:load_interfaces(229)
+  WARNING: no network interfaces found
+[1970/01/01 00:00:15, 0] smbd/server.c:main(942)
+  smbd version 3.0.37 started.
+  Copyright Andrew Tridgell and the Samba Team 1992-2009
+[1970/01/01 00:00:15, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:15, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:15, 0] lib/interface.c:load_interfaces(229)
+  WARNING: no network interfaces found
+[1970/01/01 00:00:16, 0] smbd/server.c:main(942)
+  smbd version 3.0.37 started.
+  Copyright Andrew Tridgell and the Samba Team 1992-2009
+[1970/01/01 00:00:16, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:16, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:16, 0] lib/interface.c:load_interfaces(229)
+  WARNING: no network interfaces found
+[1970/01/01 00:00:15, 0] smbd/server.c:main(942)
+  smbd version 3.0.37 started.
+  Copyright Andrew Tridgell and the Samba Team 1992-2009
+[1970/01/01 00:00:16, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:16, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:16, 0] lib/interface.c:load_interfaces(229)
+  WARNING: no network interfaces found
+[1970/01/01 00:00:15, 0] smbd/server.c:main(942)
+  smbd version 3.0.37 started.
+  Copyright Andrew Tridgell and the Samba Team 1992-2009
+[1970/01/01 00:00:15, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:15, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:15, 0] lib/interface.c:load_interfaces(229)
+  WARNING: no network interfaces found
+[1970/01/01 00:00:15, 0] smbd/server.c:main(942)
+  smbd version 3.0.37 started.
+  Copyright Andrew Tridgell and the Samba Team 1992-2009
+[1970/01/01 00:00:15, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:15, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:15, 0] lib/interface.c:load_interfaces(229)
+  WARNING: no network interfaces found
+[1970/01/01 00:00:15, 0] smbd/server.c:main(942)
+  smbd version 3.0.37 started.
+  Copyright Andrew Tridgell and the Samba Team 1992-2009
+[1970/01/01 00:00:16, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:16, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:16, 0] lib/interface.c:load_interfaces(229)
+  WARNING: no network interfaces found
+[1970/01/01 00:00:15, 0] smbd/server.c:main(942)
+  smbd version 3.0.37 started.
+  Copyright Andrew Tridgell and the Samba Team 1992-2009
+[1970/01/01 00:00:15, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:15, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:15, 0] lib/interface.c:load_interfaces(229)
+  WARNING: no network interfaces found
+[1970/01/01 00:00:15, 0] smbd/server.c:main(942)
+  smbd version 3.0.37 started.
+  Copyright Andrew Tridgell and the Samba Team 1992-2009
+[1970/01/01 00:00:15, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:15, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:15, 0] lib/interface.c:load_interfaces(229)
+  WARNING: no network interfaces found
+[1970/01/01 00:00:15, 0] smbd/server.c:main(942)
+  smbd version 3.0.37 started.
+  Copyright Andrew Tridgell and the Samba Team 1992-2009
+[1970/01/01 00:00:15, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:15, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:15, 0] lib/interface.c:load_interfaces(229)
+  WARNING: no network interfaces found
+[1970/01/01 00:00:15, 0] smbd/server.c:main(942)
+  smbd version 3.0.37 started.
+  Copyright Andrew Tridgell and the Samba Team 1992-2009
+[1970/01/01 00:00:16, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:16, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:16, 0] lib/interface.c:load_interfaces(229)
+  WARNING: no network interfaces found
+[1970/01/01 00:00:15, 0] smbd/server.c:main(942)
+  smbd version 3.0.37 started.
+  Copyright Andrew Tridgell and the Samba Team 1992-2009
+[1970/01/01 00:00:15, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:15, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:15, 0] lib/interface.c:load_interfaces(229)
+  WARNING: no network interfaces found
+[1970/01/01 00:00:15, 0] smbd/server.c:main(942)
+  smbd version 3.0.37 started.
+  Copyright Andrew Tridgell and the Samba Team 1992-2009
+[1970/01/01 00:00:15, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:15, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:15, 0] lib/interface.c:load_interfaces(229)
+  WARNING: no network interfaces found
+[1970/01/01 00:00:15, 0] smbd/server.c:main(942)
+  smbd version 3.0.37 started.
+  Copyright Andrew Tridgell and the Samba Team 1992-2009
+[1970/01/01 00:00:15, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:15, 0] printing/pcap.c:pcap_cache_reload(159)
+  Unable to open printcap file /etc/printcap for read!
+[1970/01/01 00:00:15, 0] lib/interface.c:load_interfaces(229)
+  WARNING: no network interfaces found

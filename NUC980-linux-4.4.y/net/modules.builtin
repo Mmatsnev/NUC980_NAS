@@ -1,0 +1,6 @@
+kernel/net/ipv4/tcp_cubic.ko
+kernel/net/packet/af_packet.ko
+kernel/net/packet/af_packet_diag.ko
+kernel/net/sunrpc/sunrpc.ko
+kernel/net/unix/unix.ko
+kernel/net/unix/unix_diag.ko

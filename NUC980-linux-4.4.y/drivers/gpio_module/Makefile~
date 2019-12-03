@@ -1,0 +1,15 @@
+
+all:
+
+obj-$(CONFIG_gpio_PB8)+=gpio_PB8.o
+
+clean:
+	rm -f *.o 
+	rm -f *.x 
+	rm -f *.flat
+	rm -f *.map
+	rm -f temp
+	rm -f *.img
+	rm -f $(TARGET)	
+	rm -f *.gdb
+	rm -f *.bak

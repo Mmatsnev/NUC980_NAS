@@ -1,0 +1,2 @@
+kernel/drivers/crypto/nuc980-crypto.ko
+kernel/drivers/crypto/nuc980-crypto-raw.ko

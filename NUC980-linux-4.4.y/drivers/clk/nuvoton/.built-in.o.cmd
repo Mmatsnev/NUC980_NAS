@@ -1,0 +1,1 @@
+cmd_drivers/clk/nuvoton/built-in.o :=  arm-linux-ld -EL    -r -o drivers/clk/nuvoton/built-in.o drivers/clk/nuvoton/clk-nuc980-ccf.o drivers/clk/nuvoton/clk-nuc980-upll.o drivers/clk/nuvoton/clk-nuc980-apll.o 
