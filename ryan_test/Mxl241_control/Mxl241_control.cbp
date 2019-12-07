@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Mxl241_control" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Mxl241_control" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Mxl241_control" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="mxl241_API/MaxLinearDataTypes.h" />
+		<Unit filename="mxl241_API/MxL241.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="mxl241_API/MxL241.h" />
+		<Unit filename="mxl241_API/MxL241SF_OEM_Drv.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="mxl241_API/MxL241SF_OEM_Drv.h" />
+		<Unit filename="mxl241_API/MxL241SF_PhyCfg.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="mxl241_API/MxL241SF_PhyCfg.h" />
+		<Unit filename="mxl241_API/MxL241SF_PhyCtrlApi.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="mxl241_API/MxL241SF_PhyCtrlApi.h" />
+		<Unit filename="mxl241_API/MxL_Debug.h" />
+		<Unit filename="mxl241_API/Mxl_i2c.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="mxl241_API/Mxl_i2c.h" />
+		<Unit filename="mxl241_API/main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
