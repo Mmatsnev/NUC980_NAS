@@ -122,7 +122,7 @@ UINT8 Mxl241_Init(void)
 
   delay_ms(1);
 
-  Mxl241_tune_channel(251000000,6875,64);
+  //Mxl241_tune_channel(251000000,6875,64);
 
   return 0;
 }
@@ -229,7 +229,7 @@ unsigned char Mxl241_tune_channel(signed long tune_channel_FchanHz, unsigned lon
 //  MxL241SF_PwrMode.PowerMode = STANDBY_ON;
 //  MxLWare_API_ConfigDevice(MXL_DEV_POWER_MODE_CFG, (void*)&MxL241SF_PwrMode);
   //dbm = Mxl241_Get_RxPower();
-  delay_ms(400);
+  delay_ms(1000);
   return MxL241_GetLock();
 }
 

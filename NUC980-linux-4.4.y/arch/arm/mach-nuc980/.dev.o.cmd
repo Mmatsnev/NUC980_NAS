@@ -70,7 +70,9 @@ deps_arch/arm/mach-nuc980/dev.o := \
     $(wildcard include/config/pinctrl.h) \
     $(wildcard include/config/gpio/nuc980.h) \
     $(wildcard include/config/i2c/algobit.h) \
-    $(wildcard include/config/of.h) \
+    $(wildcard include/config/sensor0/mxl241.h) \
+    $(wildcard include/config/sensor1/mxl241.h) \
+    $(wildcard include/config/use/of.h) \
     $(wildcard include/config/iio/gpio/trigger.h) \
     $(wildcard include/config/backlight/pwm.h) \
   include/linux/kernel.h \
@@ -408,6 +410,7 @@ deps_arch/arm/mach-nuc980/dev.o := \
     $(wildcard include/config/generic/msi/irq.h) \
     $(wildcard include/config/numa.h) \
     $(wildcard include/config/dma/cma.h) \
+    $(wildcard include/config/of.h) \
     $(wildcard include/config/devtmpfs.h) \
     $(wildcard include/config/sysfs/deprecated.h) \
   include/linux/ioport.h \

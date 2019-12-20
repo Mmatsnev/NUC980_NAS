@@ -1,53 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <BrowseTracker_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="mxl241_API\main.c" open="0" top="0" tabpos="1">
-		<Cursor position="0" topLine="30" />
+	<File name="mxl241_API\MxL241SF_PhyCtrlApi.h" open="0" top="0" tabpos="2">
+		<Cursor position="5639" topLine="198" />
 		<BrowseMarks positions="" />
 		<Book_Marks positions="" />
 	</File>
 	<File name="mxl241_API\MxL241.h" open="0" top="0" tabpos="3">
 		<Cursor position="1442" topLine="27" />
 		<BrowseMarks positions="1121" />
+	</File>
+	<File name="mxl241_API\main.c" open="0" top="0" tabpos="1">
+		<Cursor position="0" topLine="37" />
+		<BrowseMarks positions="1676" />
+		<Book_Marks positions="" />
+	</File>
+	<File name="mxl241_API\MxL241.c" open="0" top="0" tabpos="1">
+		<Cursor position="5053" topLine="237" />
+		<BrowseMarks positions="5073" />
 		<Book_Marks positions="" />
 	</File>
 	<File name="mxl241_API\MxL_Debug.h" open="0" top="0" tabpos="0">
 		<Cursor position="998" topLine="8" />
 	</File>
-	<File name="mxl241_API\MxL241SF_PhyCtrlApi.h" open="1" top="0" tabpos="0">
-		<Cursor position="0" topLine="0" />
-		<BrowseMarks positions="" />
-		<Book_Marks positions="" />
+	<File name="mxl241_API\Mxl_i2c.h" open="0" top="0" tabpos="0">
+		<Cursor position="182" topLine="0" />
+	</File>
+	<File name="mxl241_API\MaxLinearDataTypes.h" open="0" top="0" tabpos="0">
+		<Cursor position="1559" topLine="28" />
 	</File>
 	<File name="mxl241_API\MxL241SF_OEM_Drv.h" open="0" top="0" tabpos="0">
 		<Cursor position="827" topLine="9" />
 	</File>
-	<File name="mxl241_API\Mxl_i2c.h" open="0" top="0" tabpos="0">
-		<Cursor position="182" topLine="0" />
-		<BrowseMarks positions="" />
-		<Book_Marks positions="" />
+	<File name="mxl241_API\MxL241SF_PhyCfg.c" open="0" top="0" tabpos="0">
+		<Cursor position="9223" topLine="0" />
 	</File>
 	<File name="mxl241_API\MxL241SF_OEM_Drv.c" open="0" top="0" tabpos="0">
 		<Cursor position="2769" topLine="37" />
 		<BrowseMarks positions="1425" />
-		<Book_Marks positions="" />
-	</File>
-	<File name="mxl241_API\MaxLinearDataTypes.h" open="0" top="0" tabpos="0">
-		<Cursor position="1559" topLine="28" />
-		<BrowseMarks positions="" />
-		<Book_Marks positions="" />
-	</File>
-	<File name="mxl241_API\MxL241.c" open="1" top="1" tabpos="2">
-		<Cursor position="12147" topLine="313" />
-		<BrowseMarks positions="5115" />
-		<Book_Marks positions="" />
-	</File>
-	<File name="mxl241_API\MxL241SF_PhyCfg.c" open="0" top="0" tabpos="0">
-		<Cursor position="9223" topLine="0" />
 	</File>
 	<File name="mxl241_API\MxL241SF_PhyCtrlApi.c" open="0" top="0" tabpos="0">
 		<Cursor position="523" topLine="9" />
-		<BrowseMarks positions="" />
-		<Book_Marks positions="" />
 	</File>
 </BrowseTracker_layout_file>

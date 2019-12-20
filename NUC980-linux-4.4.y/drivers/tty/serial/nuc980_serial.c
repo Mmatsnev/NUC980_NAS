@@ -59,6 +59,11 @@
 
 //#define CONFIG_USE_DDR 1
 
+// PDMA mode time-out
+#define Time_Out_Frame_Count 2
+#define Time_Out_Low_Baudrate 115200
+
+
 static struct uart_driver nuc980serial_reg;
 
 struct clk      *clk;
@@ -92,6 +97,10 @@ struct uart_nuc980_port {
 
 	unsigned char uart_pdma_enable_flag;
 	unsigned char Tx_pdma_busy_flag;
+
+	unsigned int pdma_time_out_prescaler;
+	unsigned int pdma_time_out_count;
+	unsigned int baud_rate;
 #endif
 
 	/*
@@ -132,7 +141,7 @@ static void nuc980_Rx_dma_callback(void *arg)
 {
 	struct nuc980_dma_done *done = arg;
 	struct uart_nuc980_port *p = (struct uart_nuc980_port *)done->callback_param;
-	struct tty_port		*tty_port = &p->port.state->port;
+	struct tty_port    *tty_port = &p->port.state->port;
 	int count;
 	int copied_count = 0;
 
@@ -267,6 +276,68 @@ static void set_pdma_flag(struct uart_nuc980_port *p, int id)
 #endif
 }
 
+#if defined(CONFIG_ENABLE_UART_PDMA) || defined(CONFIG_USE_OF)
+void nuc980_uart_cal_pdma_time_out(struct uart_nuc980_port *p, unsigned int baud)
+{
+	unsigned int lcr;
+	unsigned int pdma_time_out_base = 300000000 * Time_Out_Frame_Count / 256; // 300M*Time_Out_Frame_Count/256
+	unsigned int time_out_prescaler = 0;
+	unsigned int bit_length;
+	unsigned int time_out;
+
+	if(baud > Time_Out_Low_Baudrate){
+		p->pdma_time_out_count = 255;
+		p->pdma_time_out_prescaler = 7;
+
+		return;
+	}
+
+	bit_length = 2;//1 start + 1 stop bit
+
+	lcr = serial_in(p, UART_REG_LCR);
+	switch(lcr & 0x3){
+		case 0:
+			bit_length += 5;
+
+			break;
+		case 1:
+			bit_length += 6;
+
+			break;
+		case 2:
+			bit_length += 7;
+
+			break;
+		case 3:
+			bit_length += 8;
+
+			break;
+	}
+
+	if(lcr & 0x4)
+		bit_length += 1;
+
+	if(lcr & 0x8)//Parity bit
+		bit_length += 1;
+
+	time_out = pdma_time_out_base * bit_length;
+	time_out = (time_out / baud) + 1;
+
+	while(time_out > 65535) // pdma max. time-out count is 65535
+	{
+		time_out = time_out / 2;
+		time_out_prescaler++;
+	}
+
+	if(time_out == 0) time_out = 1;
+
+	p->pdma_time_out_count = time_out;
+	p->pdma_time_out_prescaler = time_out_prescaler;
+
+	return;
+}
+#endif
+
 static void nuc980_prepare_RX_dma(struct uart_nuc980_port *p)
 {
 	struct nuc980_dma_config dma_crx;
@@ -285,7 +356,7 @@ static void nuc980_prepare_RX_dma(struct uart_nuc980_port *p)
 		                         &(p->dest_mem_p.phy_addr),
 		                         GFP_KERNEL);
 #else
-		p->dest_mem_p.size = 1020; //set to 1Kbytes
+		p->dest_mem_p.size = 256; //set to 256 bytes
 		p->dest_mem_p.vir_addr =(u32)sram_alloc(p->dest_mem_p.size, &(p->dest_mem_p.phy_addr));
 #endif
 	}
@@ -301,8 +372,10 @@ static void nuc980_prepare_RX_dma(struct uart_nuc980_port *p)
 	pdma_rx->sgrx[0].dma_address = p->dest_mem_p.phy_addr;
 	pdma_rx->sgrx[0].length = p->dest_mem_p.size;
 	dma_crx.reqsel = p->PDMA_UARTx_RX;
-	dma_crx.timeout_counter = 1000;
-	dma_crx.timeout_prescaler = 7;
+
+	dma_crx.timeout_counter = p->pdma_time_out_count;
+	dma_crx.timeout_prescaler = p->pdma_time_out_prescaler;
+
 	dma_crx.en_sc = 1;
 	pdma_rx->rxdesc=pdma_rx->chan_rx->device->device_prep_slave_sg(pdma_rx->chan_rx,
 	                pdma_rx->sgrx,
@@ -516,18 +589,22 @@ static void nuc980serial_enable_ms(struct uart_port *port)
 
 }
 
+static int max_count = 0;
+
 static void
 receive_chars(struct uart_nuc980_port *up)
 {
 	unsigned char ch;
 	unsigned int fsr;
-	int max_count = 256;
+	unsigned int isr;
+	unsigned int dcnt;
+
 	char flag;
+	isr = serial_in(up, UART_REG_ISR);
+	fsr = serial_in(up, UART_REG_FSR);
 
-	do {
-		if(serial_in(up, UART_REG_FSR) & (1 << 14)) break;
-
-		fsr = serial_in(up, UART_REG_FSR);
+	while(!(fsr & RX_EMPTY)) {
+		//fsr = serial_in(up, UART_REG_FSR);
 		flag = TTY_NORMAL;
 		up->port.icount.rx++;
 
@@ -568,19 +645,42 @@ receive_chars(struct uart_nuc980_port *up)
 			continue;
 
 		uart_insert_char(&up->port, fsr, RX_OVER_IF, ch, flag);
+		max_count++;
+		dcnt=(serial_in(up, UART_REG_FSR) >> 8) & 0x3f;
+		if(max_count > 1023)
+		{
+			spin_lock(&up->port.lock);
+			tty_flip_buffer_push(&up->port.state->port);
+			spin_unlock(&up->port.lock);
+			max_count=0;
+			if((isr & TOUT_IF) && (dcnt == 0))
+				goto tout_end;
+		}
 
-	} while (!(fsr & RX_EMPTY) && (max_count-- > 0));
+		if(isr & RDA_IF) {
+			if(dcnt == 1)
+				return; // have remaining data, don't reset max_count
+		}
+		fsr = serial_in(up, UART_REG_FSR);
+	}
 
 	spin_lock(&up->port.lock);
 	tty_flip_buffer_push(&up->port.state->port);
 	spin_unlock(&up->port.lock);
+tout_end:
+	max_count=0;
+	return;
 }
 
 static void transmit_chars(struct uart_nuc980_port *up)
 {
 	struct circ_buf *xmit = &up->port.state->xmit;
 	//int count = 12;
-	int count = 16 -((serial_in(up, UART_REG_FSR)>>16)&0x3F);
+	int count = 16 -((serial_in(up, UART_REG_FSR)>>16)&0xF);
+
+	if(serial_in(up, UART_REG_FSR) & TX_FULL){
+		count = 0;
+	}
 
 	if (up->port.x_char) {
 		while(serial_in(up, UART_REG_FSR) & TX_FULL);
@@ -600,21 +700,21 @@ static void transmit_chars(struct uart_nuc980_port *up)
 		return;
 	}
 
-	do {
+	while(count > 0){
 		//while(serial_in(up, UART_REG_FSR) & TX_FULL);
 		serial_out(up, UART_REG_THR, xmit->buf[xmit->tail]);
 		xmit->tail = (xmit->tail + 1) & (UART_XMIT_SIZE - 1);
 		up->port.icount.tx++;
+		count--;
 		if (uart_circ_empty(xmit))
 			break;
-	} while (--count > 0);
+	}
 
 	if (uart_circ_chars_pending(xmit) < WAKEUP_CHARS)
 		uart_write_wakeup(&up->port);
 
 	if (uart_circ_empty(xmit))
 		__stop_tx(up);
-
 
 }
 
@@ -632,13 +732,14 @@ static unsigned int check_modem_status(struct uart_nuc980_port *up)
 static irqreturn_t nuc980serial_interrupt(int irq, void *dev_id)
 {
 	struct uart_nuc980_port *up = (struct uart_nuc980_port *)dev_id;
-	unsigned int isr;
+	unsigned int isr, fsr;
 
 	isr = serial_in(up, UART_REG_ISR);
+	fsr = serial_in(up, UART_REG_FSR);
 
 #if defined(CONFIG_ENABLE_UART_PDMA) || defined(CONFIG_USE_OF)
 	if(up->uart_pdma_enable_flag == 1) {
-		if(isr & (BIF | FEF | PEF | RX_OVER_IF | HWBUFE_IF)) {
+		if(fsr & (BIF | FEF | PEF | RX_OVER_IF | HWBUFE_IF | TX_OVER_IF)) {
 			serial_out(up, UART_REG_FSR, (BIF | FEF | PEF | RX_OVER_IF | TX_OVER_IF));
 		}
 	} else
@@ -651,10 +752,10 @@ static irqreturn_t nuc980serial_interrupt(int irq, void *dev_id)
 
 		check_modem_status(up);
 
-		if (isr & THRE_IF)
+		if (isr & THRE_INT)
 			transmit_chars(up);
 
-		if(isr & (BIF | FEF | PEF | RX_OVER_IF)) {
+		if(fsr & (BIF | FEF | PEF | RX_OVER_IF | TX_OVER_IF)) {
 			serial_out(up, UART_REG_FSR, (BIF | FEF | PEF | RX_OVER_IF | TX_OVER_IF));
 		}
 	}
@@ -725,6 +826,7 @@ static void nuc980serial_set_mctrl(struct uart_port *port, unsigned int mctrl)
 
 	// set CTS high level trigger
 	serial_out(up, UART_REG_MSR, (serial_in(up, UART_REG_MSR) | (0x100)));
+
 	serial_out(up, UART_REG_MCR, mcr);
 }
 
@@ -794,7 +896,13 @@ static int nuc980serial_startup(struct uart_port *port)
 	/*
 	 * Now, initialize the UART
 	 */
+
+#if defined(CONFIG_ENABLE_UART_PDMA) || defined(CONFIG_USE_OF)
+	serial_out(up, UART_REG_FCR, serial_in(up, UART_REG_FCR) | 0x0); // Trigger level 1 byte
+#else
 	serial_out(up, UART_REG_FCR, serial_in(up, UART_REG_FCR) | 0x10); // Trigger level 4 byte
+#endif
+
 	serial_out(up, UART_REG_LCR, 0x7); // 8 bit
 	serial_out(up, UART_REG_TOR, 0x40);
 
@@ -811,12 +919,7 @@ static int nuc980serial_startup(struct uart_port *port)
 
 #if defined(CONFIG_ENABLE_UART_PDMA) || defined(CONFIG_USE_OF)
 	if(up->uart_pdma_enable_flag == 1) {
-		nuc980_prepare_RX_dma(up);
-
-		nuc980_prepare_TX_dma(up);
-
-		// trigger pdma
-		serial_out(up, UART_REG_IER, (serial_in(up, UART_REG_IER)|RXPDMAEN));
+		up->baud_rate = 0;
 	}
 #endif
 
@@ -951,6 +1054,22 @@ nuc980serial_set_termios(struct uart_port *port, struct ktermios *termios, struc
 
 	spin_unlock_irqrestore(&up->port.lock, flags);
 
+#if defined(CONFIG_ENABLE_UART_PDMA) || defined(CONFIG_USE_OF)
+	if(up->uart_pdma_enable_flag == 1) {
+		if(up->baud_rate != baud){
+			up->baud_rate = baud;
+
+			nuc980_uart_cal_pdma_time_out(up, baud);
+
+			nuc980_prepare_RX_dma(up);
+
+			nuc980_prepare_TX_dma(up);
+
+			// trigger pdma
+			serial_out(up, UART_REG_IER, (serial_in(up, UART_REG_IER)|RXPDMAEN));
+		}
+	}
+#endif
 }
 
 static void
@@ -1037,8 +1156,6 @@ static int nuc980serial_config_rs485(struct uart_port *port, struct serial_rs485
 {
 	struct uart_nuc980_port *p = to_nuc980_uart_port(port);
 
-	spin_lock(&port->lock);
-
 	p->rs485 = *rs485conf;
 
 	if (p->rs485.delay_rts_before_send >= 1000)
@@ -1060,8 +1177,6 @@ static int nuc980serial_config_rs485(struct uart_port *port, struct serial_rs485
 		// set auto direction mode
 		serial_out(p,UART_REG_ALT_CSR,(serial_in(p, UART_REG_ALT_CSR) | (1 << 10)) );
 	}
-
-	spin_unlock(&port->lock);
 
 	return 0;
 }

@@ -1,14 +1,7 @@
-.SUFFIXES : .x .o .c .s
 
-CC := arm-linux-gcc
-STRIP := arm-linux-strip
+all:
 
-TARGET = PB8_main
-SRCS := PB8_main.c
-
-all: 
-	$(CC) -static $(SRCS) -o $(TARGET)
-	$(STRIP) $(TARGET) 
+obj-$(CONFIG_gpio_PB8)+=gpio_PB8.o
 
 clean:
 	rm -f *.o 

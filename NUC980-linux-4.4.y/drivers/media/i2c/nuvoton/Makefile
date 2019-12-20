@@ -8,6 +8,7 @@ obj-y += sensor0_nt99141.o
 obj-y += sensor0_nt99050.o
 obj-y += sensor0_tw9912.o
 obj-y += sensor0_gc0308.o
+obj-y += sensor0_mxl241.o
 obj-y += sensor1_ov7725.o
 obj-y += sensor1_ov5640.o
 obj-y += sensor1_nt99141.o
@@ -21,6 +22,7 @@ obj-$(CONFIG_SENSOR0_NT99141) += sensor0_nt99141.o
 obj-$(CONFIG_SENSOR0_NT99050) += sensor0_nt99050.o
 obj-$(CONFIG_SENSOR0_TW9912) += sensor0_tw9912.o
 obj-$(CONFIG_SENSOR0_GC0308) += sensor0_gc0308.o
+obj-$(CONFIG_SENSOR0_MXL241) += sensor0_mxl241.o
 
 obj-$(CONFIG_SENSOR1_OV7725) += sensor1_ov7725.o
 obj-$(CONFIG_SENSOR1_OV5640) += sensor1_ov5640.o

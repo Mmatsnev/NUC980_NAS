@@ -4,6 +4,7 @@ source_drivers/staging/mt29f_spinand/mt29f_spinand.o := drivers/staging/mt29f_sp
 
 deps_drivers/staging/mt29f_spinand/mt29f_spinand.o := \
     $(wildcard include/config/mtd/spinand/gigadevice.h) \
+    $(wildcard include/config/winbond/multidie.h) \
     $(wildcard include/config/mtd/spinand/ondieecc.h) \
     $(wildcard include/config/spi/nuc980/qspi0/quad.h) \
     $(wildcard include/config/mtd/cmdline/parts.h) \

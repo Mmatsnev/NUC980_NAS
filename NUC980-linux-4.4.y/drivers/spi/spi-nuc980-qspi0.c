@@ -159,6 +159,8 @@ static inline void nuc980_slave_select(struct spi_device *spi, unsigned int ssr)
 			val |= SELECTSLAVE1;
 	}
 
+	while (__raw_readl(hw->regs + REG_STATUS) & 1); //wait busy
+
 	__raw_writel(val, hw->regs + REG_SSCTL);
 
 	spin_unlock_irqrestore(&hw->lock, flags);
@@ -625,12 +627,12 @@ static int nuc980_qspi0_setup(struct spi_device *spi)
 	if (ret)
 		return ret;
 
-	spin_lock(&hw->lock);
+	mutex_lock(&hw->bitbang.lock);
 	if (!hw->bitbang.busy) {
 		nuc980_set_divider(hw);
 		nuc980_slave_select(spi, 0);
 	}
-	spin_unlock(&hw->lock);
+	mutex_unlock(&hw->bitbang.lock);
 
 	return 0;
 }
@@ -943,7 +945,7 @@ static int nuc980_qspi0_suspend(struct device *dev)
 {
 	struct nuc980_spi *hw = dev_get_drvdata(dev);
 
-	while(__raw_readl(hw->regs + REG_CTL) & 0x1)
+	while (__raw_readl(hw->regs + REG_STATUS) & 1) //wait busy
 		msleep(1);
 
 	// disable interrupt

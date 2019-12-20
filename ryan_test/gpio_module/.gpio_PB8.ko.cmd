@@ -1,0 +1,1 @@
+cmd_drivers/gpio_module/gpio_PB8.ko := arm-linux-ld -EL -r  -T ./scripts/module-common.lds --build-id  -o drivers/gpio_module/gpio_PB8.ko drivers/gpio_module/gpio_PB8.o drivers/gpio_module/gpio_PB8.mod.o

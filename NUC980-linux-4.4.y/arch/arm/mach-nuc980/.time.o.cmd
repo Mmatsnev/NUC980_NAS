@@ -690,6 +690,8 @@ deps_arch/arm/mach-nuc980/time.o := \
   include/linux/kmemleak.h \
     $(wildcard include/config/debug/kmemleak.h) \
   include/linux/kasan.h \
+  include/linux/sched_clock.h \
+    $(wildcard include/config/generic/sched/clock.h) \
   arch/arm/include/asm/mach-types.h \
   include/generated/mach-types.h \
     $(wildcard include/config/arch/ebsa110.h) \

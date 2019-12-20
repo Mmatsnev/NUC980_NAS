@@ -186,15 +186,50 @@ static inline void nuc980_i2c3_enable_irq(struct nuc980_i2c *i2c)
 
 static void nuc980_i2c3_message_start(struct nuc980_i2c *i2c)
 {
+	writel(((readl(i2c->regs+CTL0) &~ (0x3C))|I2C_CTL_SI), i2c->regs + CTL0);
 	writel(((readl(i2c->regs+CTL0) &~ (0x3C))|I2C_CTL_STA), i2c->regs + CTL0);
 }
 
 static inline void nuc980_i2c3_stop(struct nuc980_i2c *i2c, int ret)
 {
+	unsigned int tmp, i = 0;
+
 	dev_dbg(i2c->dev, "STOP\n");
 
-	writel(((readl(i2c->regs+CTL0) &~ (0x3C))|(I2C_CTL_STO | I2C_CTL_SI | I2C_CTL_AA)), (i2c->regs+CTL0));
-	while(readl(i2c->regs+CTL0) & I2C_CTL_STO);
+	if(readl(i2c->regs+CTL0) & 0x4){
+		writel((readl(i2c->regs+CTL0) &~ (0x4)), (i2c->regs+CTL0));
+		mdelay(1);
+	}
+
+	writel(((readl(i2c->regs+CTL0) &~ (0x3C))|(I2C_CTL_STO | I2C_CTL_SI)), (i2c->regs+CTL0));
+
+	while(readl(i2c->regs+CTL0) & I2C_CTL_STO){
+
+		i++;
+
+		if(i > 100000){
+			tmp = readl(i2c->regs+CLKDIV);
+
+			writel(0x59, REG_WRPRTR);
+			writel(0x16, REG_WRPRTR);
+			writel(0x88, REG_WRPRTR);
+
+			writel((readl(REG_APBIPRST1) |  (0x1 << 3)), REG_APBIPRST1);
+			udelay(1);
+			writel((readl(REG_APBIPRST1) &~ (0x1 << 3)), REG_APBIPRST1);
+                 
+			writel(0x1, REG_WRPRTR);
+
+			writel(tmp, (i2c->regs+CLKDIV));
+
+			mdelay(1);
+			writel((readl(i2c->regs+CTL0) | (0x40)), (i2c->regs+CTL0));
+		}
+	}
+
+	#if defined(CONFIG_ENABLE_I2C_P1_SLAVE_MODE)
+	writel(((readl(i2c->regs+CTL0) &~ (0x3C))|(I2C_CTL_SI | I2C_CTL_AA)), (i2c->regs+CTL0));
+	#endif
 
 	nuc980_i2c3_master_complete(i2c, ret);
 }
@@ -362,7 +397,7 @@ static void i2c_nuc980_irq_master_TRx(struct nuc980_i2c *i2c, unsigned long iics
 			//return;
 		}
 		else
-			writel(((readl(i2c->regs+CTL0) &~ (0x3C))|I2C_CTL_SI), (i2c->regs+CTL0));
+			writel(((readl(i2c->regs+CTL0) &~ (0x3C))|I2C_CTL_SI_AA), (i2c->regs+CTL0));
 	}
 	else if ((iicstat == M_RECE_DATA_ACK) || (iicstat == M_RECE_DATA_NACK))
 	{ /* DATA has been transmitted and ACK has been received */
@@ -432,6 +467,9 @@ static irqreturn_t nuc980_i2c_irq(int irqno, void *dev_id)
 		/* deal with arbitration loss */
 		dev_err(i2c->dev, "deal with arbitration loss\n");
 		i2c->arblost = 1;
+		
+		nuc980_i2c3_disable_irq(i2c);
+		nuc980_i2c3_stop(i2c, 0);
 		goto out;
 	}
 
@@ -484,10 +522,9 @@ static int nuc980_i2c3_doxfer(struct nuc980_i2c *i2c,
 	int spins = 20;
 	int ret;
 
-	//printk("\n nuc980_i2c3_doxfer ");
-	//printk("\n i2c->msg->addr = 0x%x ", i2c->msg->addr);
-
 	spin_lock_irq(&i2c->lock);
+
+	nuc980_i2c3_enable_irq(i2c);
 
 	i2c->msg     = msgs;
 	i2c->msg_num = num;
@@ -554,10 +591,6 @@ static int nuc980_i2c3_xfer(struct i2c_adapter *adap, struct i2c_msg *msgs, int 
 	int retry;
 	int ret;
 
-	//printk("\n nuc980_i2c3_xfer \n");
-
-	nuc980_i2c3_enable_irq(i2c);
-
 	for (retry = 0; retry < adap->retries; retry++) {
 
 		ret = nuc980_i2c3_doxfer(i2c, msgs, num);
@@ -577,8 +610,6 @@ static int nuc980_i2c3_xfer(struct i2c_adapter *adap, struct i2c_msg *msgs, int 
 static int nuc980_reg_slave(struct i2c_client *slave)
 {
 	struct nuc980_i2c *priv = i2c_get_adapdata(slave->adapter);
-
-	printk("\n nuc980_reg_slave \n");
 
 	if (priv->slave)
 		return -EBUSY;
@@ -607,8 +638,6 @@ static int nuc980_reg_slave(struct i2c_client *slave)
 static int nuc980_unreg_slave(struct i2c_client *slave)
 {
 	struct nuc980_i2c *priv = i2c_get_adapdata(slave->adapter);
-
-	//printk("\n nuc980_unreg_slave \n");
 
 	// Disable I2C
 	writel(readl(priv->regs + CTL0) &~ (0x1 << 6), (priv->regs + CTL0)); // CTL0
@@ -656,8 +685,6 @@ static int nuc980_i2c3_probe(struct platform_device *pdev)
 	struct device *dev = &pdev->dev;
 
 	struct pinctrl *pinctrl;
-
-	//printk("\n nuc980_i2c3_probe \n");
 
 	if (!pdev->dev.of_node) {
 		pdata = pdev->dev.platform_data;

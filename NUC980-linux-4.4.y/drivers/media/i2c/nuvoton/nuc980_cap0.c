@@ -1491,6 +1491,8 @@ extern int nuvoton_vin0_probe_nt99050(struct nuvoton_vin_device* cam);
 extern int nuvoton_vin0_probe_tw9912(struct nuvoton_vin_device* cam);
 #elif defined(CONFIG_SENSOR0_GC0308)
 extern int nuvoton_vin0_probe_gc0308(struct nuvoton_vin_device* cam);
+#elif defined(CONFIG_SENSOR0_MXL241)
+extern int nuvoton_vin0_probe_mxl241(struct nuvoton_vin_device* cam);
 #endif
 #else
 extern int nuvoton_vin0_probe_ov7725(struct nuvoton_vin_device* cam);
@@ -1499,6 +1501,7 @@ extern int nuvoton_vin0_probe_nt99141(struct nuvoton_vin_device* cam);
 extern int nuvoton_vin0_probe_nt99050(struct nuvoton_vin_device* cam);
 extern int nuvoton_vin0_probe_tw9912(struct nuvoton_vin_device* cam);
 extern int nuvoton_vin0_probe_gc0308(struct nuvoton_vin_device* cam);
+extern int nuvoton_vin0_probe_mxl241(struct nuvoton_vin_device* cam);
 #endif
 int nuvoton_vdi0_device_register(struct platform_device *pdev)
 {
@@ -1543,6 +1546,8 @@ int nuvoton_vdi0_device_register(struct platform_device *pdev)
 	err=nuvoton_vin0_probe_tw9912(cam);//sensor probe;
 #elif defined(CONFIG_SENSOR0_GC0308)
 	err=nuvoton_vin0_probe_gc0308(cam);//sensor probe;
+#elif defined(CONFIG_SENSOR0_MXL241)
+	err=nuvoton_vin0_probe_mxl241(cam);
 #endif
 	if(err<0) {
 		gpio_free(CAP0_PD_PIN);
@@ -1563,6 +1568,8 @@ int nuvoton_vdi0_device_register(struct platform_device *pdev)
 		err=nuvoton_vin0_probe_tw9912(cam); //sensor probe;
 	else if(sensor0_model==SENSOR_GC0308)
 		err=nuvoton_vin0_probe_gc0308(cam); //sensor probe;
+	else if(sensor0_model==SENSOR_MXL241)
+		err=nuvoton_vin0_probe_mxl241(cam); //sensor probe;
 
 	if(err<0) {
 		gpio_free(CAP0_PD_PIN);

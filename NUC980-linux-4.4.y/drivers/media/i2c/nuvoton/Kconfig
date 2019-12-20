@@ -17,7 +17,7 @@ if !USE_OF
 choice
 	prompt "Nuvoton NUC980 Image Sensor Selection"
 	depends on VIDEO0_NUC980
-	default SENSOR0_NT99141
+	default SENSOR0_MXL241
 config SENSOR0_OV7725
 	bool "OV7725"
 config SENSOR0_OV5640
@@ -30,6 +30,8 @@ config SENSOR0_TW9912
 	bool "TW9912"
 config SENSOR0_GC0308
         bool "GC0308"
+config SENSOR0_MXL241
+        bool "MXL241"
 endchoice
 endif
 

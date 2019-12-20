@@ -357,13 +357,13 @@ void paser_usb_irq(struct nuc980_udc *udc, int irq)
 	{
 		if (__raw_readl(udc->base + REG_USBD_PHYCTL) & USBD_PHYCTL_VBUSDET)
 		{
-//printk("plug-in\n");
+printk("plug-in\n");
 			__raw_writel(__raw_readl(udc->base + REG_USBD_CEPCTL)|USB_CEPCTL_FLUSH, udc->base + REG_USBD_CEPCTL);
 			nuc980_udc_enable(udc);
 		}
 		else
 		{
-//printk("plug-out\n");
+printk("plug-out\n");
 			nuc980_udc_disable(udc);
 			nuke(udc, &udc->ep[0], -ESHUTDOWN);
 		}
@@ -1123,14 +1123,14 @@ static const struct usb_gadget_ops nuc980_ops =
 static void nuc980_udc_enable(struct nuc980_udc *udc)
 {
 //    udc->gadget.speed = USB_SPEED_HIGH;
-//printk("enable: 0x%x\n", __raw_readl(udc->base + REG_USBD_PHYCTL));
+printk("enable: 0x%x\n", __raw_readl(udc->base + REG_USBD_PHYCTL));
 	__raw_writel(__raw_readl(udc->base + REG_USBD_PHYCTL) | 0x100, udc->base + REG_USBD_PHYCTL);
 }
 
 static void nuc980_udc_disable(struct nuc980_udc *udc)
 {
 	unsigned int i;
-//printk("disable: 0x%x\n", __raw_readl(udc->base + REG_USBD_PHYCTL));
+printk("disable: 0x%x\n", __raw_readl(udc->base + REG_USBD_PHYCTL));
 	__raw_writel(0, udc->base + REG_USBD_CEPINTEN);
 	__raw_writel(0xffff, udc->base + REG_USBD_CEPINTSTS);
 	__raw_writel(__raw_readl(udc->base + REG_USBD_CEPCTL)|USB_CEPCTL_FLUSH, udc->base + REG_USBD_CEPCTL);

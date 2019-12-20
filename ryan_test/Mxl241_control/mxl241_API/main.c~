@@ -7,18 +7,30 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <string.h>
 #include "include/i2c/smbus.h"
 
 #include "Mxl_i2c.h"
 #include "MxL241.h"
 
+void usage(char *exename)
+{
+    printf("Usage:\n");
+    printf("    %s Mxl241 tuner, frequency\n", exename);
+    printf("    led_no = 1, 2, 3 or 4\n");
+} 
+   
+
 int fp_i2c;
 int a;
-int main(int arc,char **argv)
+int main(int argc,char **argv)
 {
 
     int adapter_nr = 4; /* probably dynamically determined */
     char filename[20];
+    unsigned int fre_MHz;
+    if (argc > 3 || argc == 1)
+        goto err;
 
     snprintf(filename, 19, "/dev/i2c-%d", adapter_nr);
     fp_i2c = open(filename, O_RDWR);
@@ -41,13 +53,45 @@ int main(int arc,char **argv)
         exit(1);
     }
 
-    printf("Open Mxl241 Chip Successfully!");
+    printf("Open Mxl241 Chip Successfully!\n");
+
+    printf("Mxl241 initialization...\n");
 
     Mxl241_Init();
 
-    close(fd);
+    printf("Mxl241 initialization successful!\n");
+
+    if(argc == 2)
+    {
+        if(strlen(argv[1])!=3)
+        {
+            goto err;
+        }
+        else
+        {
+            fre_MHz = (*(argv[1]))*100 + (*(argv[1]+1))*10 + (*(argv[1]+2));
+            printf("the frequency is %d MHz!\n",fre_MHz);
+            if(Mxl241_tune_channel(fre_MHz, 6875, 64) != 1)
+            {
+               printf("Mxl241 is unlocked! Please Check the tuner!\n");
+            }
+            else
+            {
+                 printf("Mxl241 is locked!\n");
+            }
+        }
+
+    }
+
+    close(fp_i2c);
 
 	return 0;
 
+err:
+    if (fp_i2c > 0)
+        close(fp_i2c);
+    usage(argv[0]);
+    return -1;
 
 }
+
