@@ -31,7 +31,7 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-build_triplet = i686-pc-linux-gnu
+build_triplet = x86_64-unknown-linux-gnu
 host_triplet = arm-unknown-linux-gnu
 target_triplet = arm-unknown-linux-gnu
 subdir = .
@@ -41,8 +41,8 @@ DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
 	COPYING ChangeLog INSTALL NEWS config.guess config.sub depcomp \
 	install-sh missing mkinstalldirs
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/acinclude.m4 \
-	$(top_srcdir)/configure.ac
+am__aclocal_m4_deps = $(top_srcdir)/src/missing/m4/salen.m4 \
+	$(top_srcdir)/acinclude.m4 $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
@@ -104,11 +104,11 @@ DIST_ARCHIVES = $(distdir).tar.gz $(distdir).tar.bz2 $(distdir).zip
 GZIP_ENV = --best
 distuninstallcheck_listfiles = find . -type f -print
 distcleancheck_listfiles = find . -type f -print
-ACLOCAL = ${SHELL} /home/wcl/nuc980bsp/20190808/NUC980_Linux_Applications/benchmark/netperf-2.6.0/missing --run aclocal-1.11
-AMTAR = ${SHELL} /home/wcl/nuc980bsp/20190808/NUC980_Linux_Applications/benchmark/netperf-2.6.0/missing --run tar
-AUTOCONF = ${SHELL} /home/wcl/nuc980bsp/20190808/NUC980_Linux_Applications/benchmark/netperf-2.6.0/missing --run autoconf
-AUTOHEADER = ${SHELL} /home/wcl/nuc980bsp/20190808/NUC980_Linux_Applications/benchmark/netperf-2.6.0/missing --run autoheader
-AUTOMAKE = ${SHELL} /home/wcl/nuc980bsp/20190808/NUC980_Linux_Applications/benchmark/netperf-2.6.0/missing --run automake-1.11
+ACLOCAL = ${SHELL} /home/andy/workzone/970/applications/benchmark/netperf-2.6.0/missing --run aclocal-1.11
+AMTAR = ${SHELL} /home/andy/workzone/970/applications/benchmark/netperf-2.6.0/missing --run tar
+AUTOCONF = ${SHELL} /home/andy/workzone/970/applications/benchmark/netperf-2.6.0/missing --run autoconf
+AUTOHEADER = ${SHELL} /home/andy/workzone/970/applications/benchmark/netperf-2.6.0/missing --run autoheader
+AUTOMAKE = ${SHELL} /home/andy/workzone/970/applications/benchmark/netperf-2.6.0/missing --run automake-1.11
 AWK = gawk
 CC = arm-linux-gcc
 CCDEPMODE = depmode=gcc3
@@ -133,12 +133,12 @@ LDFLAGS =
 LIBOBJS = 
 LIBS = -ldl -lm 
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /home/wcl/nuc980bsp/20190808/NUC980_Linux_Applications/benchmark/netperf-2.6.0/missing --run makeinfo
+MAKEINFO = ${SHELL} /home/andy/workzone/970/applications/benchmark/netperf-2.6.0/missing --run makeinfo
 MKDIR_P = /bin/mkdir -p
 NETCPU_SOURCE = procstat
 NETDRVLKUP_SOURCE = ethtool
 NETRTLKUP_SOURCE = rtnetlink
-NETSECLKUP_SOURCE = linux
+NETSECLKUP_SOURCE = none
 NETSLOTLKUP_SOURCE = linux
 NETSYSLKUP_SOURCE = linux
 OBJEXT = o
@@ -147,17 +147,18 @@ PACKAGE_BUGREPORT =
 PACKAGE_NAME = netperf
 PACKAGE_STRING = netperf 2.6.0
 PACKAGE_TARNAME = netperf
+PACKAGE_URL = 
 PACKAGE_VERSION = 2.6.0
 PATH_SEPARATOR = :
 RANLIB = arm-linux-ranlib
 SET_MAKE = 
-SHELL = /bin/sh
+SHELL = /bin/bash
 STRIP = arm-linux-strip
 VERSION = 2.6.0
-abs_builddir = /home/wcl/nuc980bsp/20190808/NUC980_Linux_Applications/benchmark/netperf-2.6.0
-abs_srcdir = /home/wcl/nuc980bsp/20190808/NUC980_Linux_Applications/benchmark/netperf-2.6.0
-abs_top_builddir = /home/wcl/nuc980bsp/20190808/NUC980_Linux_Applications/benchmark/netperf-2.6.0
-abs_top_srcdir = /home/wcl/nuc980bsp/20190808/NUC980_Linux_Applications/benchmark/netperf-2.6.0
+abs_builddir = /home/andy/workzone/970/applications/benchmark/netperf-2.6.0
+abs_srcdir = /home/andy/workzone/970/applications/benchmark/netperf-2.6.0
+abs_top_builddir = /home/andy/workzone/970/applications/benchmark/netperf-2.6.0
+abs_top_srcdir = /home/andy/workzone/970/applications/benchmark/netperf-2.6.0
 ac_ct_CC = 
 am__include = include
 am__leading_dot = .
@@ -165,11 +166,11 @@ am__quote =
 am__tar = ${AMTAR} chof - "$$tardir"
 am__untar = ${AMTAR} xf -
 bindir = ${exec_prefix}/bin
-build = i686-pc-linux-gnu
+build = x86_64-unknown-linux-gnu
 build_alias = 
-build_cpu = i686
+build_cpu = x86_64
 build_os = linux-gnu
-build_vendor = pc
+build_vendor = unknown
 builddir = .
 datadir = ${datarootdir}
 datarootdir = ${prefix}/share
@@ -184,7 +185,7 @@ host_vendor = unknown
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/wcl/nuc980bsp/20190808/NUC980_Linux_Applications/benchmark/netperf-2.6.0/install-sh
+install_sh = ${SHELL} /home/andy/workzone/970/applications/benchmark/netperf-2.6.0/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -525,7 +526,7 @@ distcheck: dist
 	*.zip*) \
 	  unzip $(distdir).zip ;;\
 	esac
-	chmod -R a-w $(distdir); chmod u+w $(distdir)
+	chmod -R a-w $(distdir); chmod a+w $(distdir)
 	mkdir $(distdir)/_build
 	mkdir $(distdir)/_inst
 	chmod a-w $(distdir)

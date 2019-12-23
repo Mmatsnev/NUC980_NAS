@@ -1,3 +1,3 @@
-obj-$(CONFIG_gpio_PB8)+=gpio_PB8.o
+obj-$(CONFIG_TS_GPIO)+=TS_GPIO.o
 
 

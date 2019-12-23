@@ -34,7 +34,7 @@
 
 
 
-#if 0
+#if 1
 #define VDI_DEBUG_ENABLE_ENTER_LEAVE
 #define VDI_DEBUG
 #endif

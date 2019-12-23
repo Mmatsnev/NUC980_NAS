@@ -32,7 +32,7 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-build_triplet = i686-pc-linux-gnu
+build_triplet = x86_64-unknown-linux-gnu
 host_triplet = arm-unknown-linux-gnu
 target_triplet = arm-unknown-linux-gnu
 bin_PROGRAMS = netperf$(EXEEXT) netserver$(EXEEXT)
@@ -40,8 +40,8 @@ subdir = src
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
 	$(srcdir)/netperf_version.h.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/acinclude.m4 \
-	$(top_srcdir)/configure.ac
+am__aclocal_m4_deps = $(top_srcdir)/src/missing/m4/salen.m4 \
+	$(top_srcdir)/acinclude.m4 $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
@@ -60,7 +60,7 @@ am__objects_3 = netrt_rtnetlink.$(OBJEXT)
 am__objects_4 = netdrv_ethtool.$(OBJEXT)
 am__objects_5 = netslot_linux.$(OBJEXT)
 am__objects_6 = netsys_linux.$(OBJEXT)
-am__objects_7 = netsec_linux.$(OBJEXT)
+am__objects_7 = netsec_none.$(OBJEXT)
 am_netperf_OBJECTS = netperf.$(OBJEXT) $(am__objects_1) \
 	$(am__objects_2) $(am__objects_3) $(am__objects_4) \
 	$(am__objects_5) $(am__objects_6) $(am__objects_7)
@@ -122,11 +122,11 @@ am__relativize = \
     dir1=`echo "$$dir1" | sed -e "$$sed_rest"`; \
   done; \
   reldir="$$dir2"
-ACLOCAL = ${SHELL} /home/wcl/nuc980bsp/20190808/NUC980_Linux_Applications/benchmark/netperf-2.6.0/missing --run aclocal-1.11
-AMTAR = ${SHELL} /home/wcl/nuc980bsp/20190808/NUC980_Linux_Applications/benchmark/netperf-2.6.0/missing --run tar
-AUTOCONF = ${SHELL} /home/wcl/nuc980bsp/20190808/NUC980_Linux_Applications/benchmark/netperf-2.6.0/missing --run autoconf
-AUTOHEADER = ${SHELL} /home/wcl/nuc980bsp/20190808/NUC980_Linux_Applications/benchmark/netperf-2.6.0/missing --run autoheader
-AUTOMAKE = ${SHELL} /home/wcl/nuc980bsp/20190808/NUC980_Linux_Applications/benchmark/netperf-2.6.0/missing --run automake-1.11
+ACLOCAL = ${SHELL} /home/andy/workzone/970/applications/benchmark/netperf-2.6.0/missing --run aclocal-1.11
+AMTAR = ${SHELL} /home/andy/workzone/970/applications/benchmark/netperf-2.6.0/missing --run tar
+AUTOCONF = ${SHELL} /home/andy/workzone/970/applications/benchmark/netperf-2.6.0/missing --run autoconf
+AUTOHEADER = ${SHELL} /home/andy/workzone/970/applications/benchmark/netperf-2.6.0/missing --run autoheader
+AUTOMAKE = ${SHELL} /home/andy/workzone/970/applications/benchmark/netperf-2.6.0/missing --run automake-1.11
 AWK = gawk
 CC = arm-linux-gcc
 CCDEPMODE = depmode=gcc3
@@ -151,12 +151,12 @@ LDFLAGS =
 LIBOBJS = 
 LIBS = -ldl -lm 
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /home/wcl/nuc980bsp/20190808/NUC980_Linux_Applications/benchmark/netperf-2.6.0/missing --run makeinfo
+MAKEINFO = ${SHELL} /home/andy/workzone/970/applications/benchmark/netperf-2.6.0/missing --run makeinfo
 MKDIR_P = /bin/mkdir -p
 NETCPU_SOURCE = procstat
 NETDRVLKUP_SOURCE = ethtool
 NETRTLKUP_SOURCE = rtnetlink
-NETSECLKUP_SOURCE = linux
+NETSECLKUP_SOURCE = none
 NETSLOTLKUP_SOURCE = linux
 NETSYSLKUP_SOURCE = linux
 OBJEXT = o
@@ -165,17 +165,18 @@ PACKAGE_BUGREPORT =
 PACKAGE_NAME = netperf
 PACKAGE_STRING = netperf 2.6.0
 PACKAGE_TARNAME = netperf
+PACKAGE_URL = 
 PACKAGE_VERSION = 2.6.0
 PATH_SEPARATOR = :
 RANLIB = arm-linux-ranlib
 SET_MAKE = 
-SHELL = /bin/sh
+SHELL = /bin/bash
 STRIP = arm-linux-strip
 VERSION = 2.6.0
-abs_builddir = /home/wcl/nuc980bsp/20190808/NUC980_Linux_Applications/benchmark/netperf-2.6.0/src
-abs_srcdir = /home/wcl/nuc980bsp/20190808/NUC980_Linux_Applications/benchmark/netperf-2.6.0/src
-abs_top_builddir = /home/wcl/nuc980bsp/20190808/NUC980_Linux_Applications/benchmark/netperf-2.6.0
-abs_top_srcdir = /home/wcl/nuc980bsp/20190808/NUC980_Linux_Applications/benchmark/netperf-2.6.0
+abs_builddir = /home/andy/workzone/970/applications/benchmark/netperf-2.6.0/src
+abs_srcdir = /home/andy/workzone/970/applications/benchmark/netperf-2.6.0/src
+abs_top_builddir = /home/andy/workzone/970/applications/benchmark/netperf-2.6.0
+abs_top_srcdir = /home/andy/workzone/970/applications/benchmark/netperf-2.6.0
 ac_ct_CC = 
 am__include = include
 am__leading_dot = .
@@ -183,11 +184,11 @@ am__quote =
 am__tar = ${AMTAR} chof - "$$tardir"
 am__untar = ${AMTAR} xf -
 bindir = ${exec_prefix}/bin
-build = i686-pc-linux-gnu
+build = x86_64-unknown-linux-gnu
 build_alias = 
-build_cpu = i686
+build_cpu = x86_64
 build_os = linux-gnu
-build_vendor = pc
+build_vendor = unknown
 builddir = .
 datadir = ${datarootdir}
 datarootdir = ${prefix}/share
@@ -202,7 +203,7 @@ host_vendor = unknown
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/wcl/nuc980bsp/20190808/NUC980_Linux_Applications/benchmark/netperf-2.6.0/install-sh
+install_sh = ${SHELL} /home/andy/workzone/970/applications/benchmark/netperf-2.6.0/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -234,7 +235,7 @@ USE_RT_SOURCE = netrt_rtnetlink.c
 USE_DRV_SOURCE = netdrv_ethtool.c
 USE_SLOT_SOURCE = netslot_linux.c
 USE_SYS_SOURCE = netsys_linux.c
-USE_SEC_SOURCE = netsec_linux.c
+USE_SEC_SOURCE = netsec_none.c
 EXTRA_DIST = netcpu_none.c netcpu_looper.c netcpu_pstat.c netcpu_pstatnew.c netcpu_perfstat.c netcpu_procstat.c netcpu_kstat.c netcpu_kstat10.c netcpu_sysctl.c netcpu_ntperf.c netcpu_osx.c dirs NetPerfDir/* NetServerDir/* netperf_version.h.in netrt_rtnetlink.c netrt_none.c netrt_rtmget.c netdrv_ethtool.c netdrv_none.c netslot_linux.c netslot_none.c netsys_none.c netsys_hpux11i.c netsys_linux.c netsys_solaris.c netdrv_solaris.c netslot_solaris.c netslot_ux1131.c netsec_linux.c netsec_none.c Makefile.uw
 COMMON_SRC = hist.h netlib.c netlib.h netcpu.h netsh.c netsh.h nettest_bsd.c nettest_bsd.h nettest_dlpi.c nettest_dlpi.h nettest_unix.c nettest_unix.h nettest_xti.c nettest_xti.h nettest_sctp.c nettest_sctp.h netperf_version.h nettest_sdp.c nettest_sdp.h nettest_omni.c net_uuid.c dscp.c
 netperf_SOURCES = netperf.c $(COMMON_SRC) $(USE_CPU_SOURCE) $(USE_RT_SOURCE) $(USE_DRV_SOURCE) $(USE_SLOT_SOURCE) $(USE_SYS_SOURCE) $(USE_SEC_SOURCE)
@@ -336,7 +337,7 @@ include ./$(DEPDIR)/netdrv_ethtool.Po
 include ./$(DEPDIR)/netlib.Po
 include ./$(DEPDIR)/netperf.Po
 include ./$(DEPDIR)/netrt_rtnetlink.Po
-include ./$(DEPDIR)/netsec_linux.Po
+include ./$(DEPDIR)/netsec_none.Po
 include ./$(DEPDIR)/netserver.Po
 include ./$(DEPDIR)/netsh.Po
 include ./$(DEPDIR)/netslot_linux.Po

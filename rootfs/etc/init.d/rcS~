@@ -23,17 +23,17 @@ insmod /ts/g_mass_storage.ko file=/dev/mmcblk0p1 stall=0 removable=1
 #mount -o remount,rw /dev/mmcblk0p1
 sleep 2
 
-sh /etc/init.d/starthttp.sh
+#sh /etc/init.d/starthttp.sh
 sleep 2
 
 
 /bin/echo 2 > /proc/cpu/alignment
-/ts/bluenet 0xb3-5053 0xb4-5054 &
-/ts/test 5053 &
+#/ts/bluenet 0xb3-5053 0xb4-5054 &
+#/ts/test 5053 &
 
 #shttpd -root /mnt/mmcblk0p1/website/tongshi -ports 80&
 
-/usr/local/samba/bin/smbd -D &
+#/usr/local/samba/bin/smbd -D &
 
 #/usr/sbin/crond &
 

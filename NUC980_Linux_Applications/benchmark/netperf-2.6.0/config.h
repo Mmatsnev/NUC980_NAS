@@ -182,6 +182,9 @@
 /* Define to 1 if you have the <smbios/SystemInfo.h> header file. */
 /* #undef HAVE_SMBIOS_SYSTEMINFO_H */
 
+/* Define if struct sockaddr has the sa_len member */
+/* #undef HAVE_SOCKADDR_SA_LEN */
+
 /* Define to 1 if you have the `socket' function. */
 #define HAVE_SOCKET 1
 
@@ -305,6 +308,9 @@
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "netperf"
 
+/* Define to the home page for this package. */
+#define PACKAGE_URL ""
+
 /* Define to the version of this package. */
 #define PACKAGE_VERSION "2.6.0"
 
@@ -321,7 +327,7 @@
 #define SELECT_TYPE_ARG5 (struct timeval *)
 
 /* Define to 1 if the `setpgrp' function takes no argument. */
-#define SETPGRP_VOID 1
+/* #undef SETPGRP_VOID */
 
 /* Define to 1 if you have the ANSI C header files. */
 #define STDC_HEADERS 1

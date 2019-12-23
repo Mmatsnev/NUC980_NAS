@@ -47,8 +47,8 @@
 #include <linux/time.h>
 
 #include "nuc980_cap.h"
-#define  CAP0_PD_PIN NUC980_PB1
-#define  CAP0_RST_PIN NUC980_PC7
+#define  CAP0_PD_PIN  NUC980_PC0
+#define  CAP0_RST_PIN NUC980_PC1
 u32 sensor0_model = 1;
 u32 video0_freq = 24000000;
 

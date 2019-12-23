@@ -1,18 +1,26 @@
 src/lzo_crc.lo: src/lzo_crc.c src/lzo_conf.h include/lzo/lzoconf.h \
- config.h /usr/lib/gcc/i686-redhat-linux/4.4.7/include/limits.h \
- /usr/lib/gcc/i686-redhat-linux/4.4.7/include/syslimits.h \
- /usr/include/limits.h /usr/include/features.h /usr/include/sys/cdefs.h \
- /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
- /usr/include/gnu/stubs-32.h /usr/include/bits/posix1_lim.h \
- /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
- /usr/include/bits/posix2_lim.h \
- /usr/lib/gcc/i686-redhat-linux/4.4.7/include/stddef.h \
- include/lzo/lzodefs.h /usr/include/string.h /usr/include/xlocale.h \
- /usr/include/bits/string.h /usr/include/bits/string2.h \
- /usr/include/endian.h /usr/include/bits/endian.h \
- /usr/include/bits/byteswap.h /usr/include/bits/types.h \
- /usr/include/bits/typesizes.h /usr/include/stdlib.h src/lzo_supp.h \
- /usr/include/assert.h src/lzo_func.h src/lzo_ptr.h
+  config.h \
+  /usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/include-fixed/limits.h \
+  /usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/include-fixed/syslimits.h \
+  /usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/../../../../arm-none-linux-gnueabi/include/limits.h \
+  /usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/../../../../arm-none-linux-gnueabi/include/features.h \
+  /usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/../../../../arm-none-linux-gnueabi/include/bits/predefs.h \
+  /usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/../../../../arm-none-linux-gnueabi/include/sys/cdefs.h \
+  /usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/../../../../arm-none-linux-gnueabi/include/bits/wordsize.h \
+  /usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/../../../../arm-none-linux-gnueabi/include/gnu/stubs.h \
+  /usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/../../../../arm-none-linux-gnueabi/include/bits/posix1_lim.h \
+  /usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/../../../../arm-none-linux-gnueabi/include/bits/local_lim.h \
+  /usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/../../../../arm-none-linux-gnueabi/include/linux/limits.h \
+  /usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/../../../../arm-none-linux-gnueabi/include/bits/posix2_lim.h \
+  /usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/include/stddef.h \
+  include/lzo/lzodefs.h \
+  /usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/../../../../arm-none-linux-gnueabi/include/string.h \
+  /usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/../../../../arm-none-linux-gnueabi/include/bits/string.h \
+  /usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/../../../../arm-none-linux-gnueabi/include/bits/string2.h \
+  /usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/../../../../arm-none-linux-gnueabi/include/stdlib.h \
+  src/lzo_supp.h \
+  /usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/../../../../arm-none-linux-gnueabi/include/assert.h \
+  src/lzo_func.h src/lzo_ptr.h
 
 src/lzo_conf.h:
 
@@ -20,57 +28,45 @@ include/lzo/lzoconf.h:
 
 config.h:
 
-/usr/lib/gcc/i686-redhat-linux/4.4.7/include/limits.h:
+/usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/include-fixed/limits.h:
 
-/usr/lib/gcc/i686-redhat-linux/4.4.7/include/syslimits.h:
+/usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/include-fixed/syslimits.h:
 
-/usr/include/limits.h:
+/usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/../../../../arm-none-linux-gnueabi/include/limits.h:
 
-/usr/include/features.h:
+/usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/../../../../arm-none-linux-gnueabi/include/features.h:
 
-/usr/include/sys/cdefs.h:
+/usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/../../../../arm-none-linux-gnueabi/include/bits/predefs.h:
 
-/usr/include/bits/wordsize.h:
+/usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/../../../../arm-none-linux-gnueabi/include/sys/cdefs.h:
 
-/usr/include/gnu/stubs.h:
+/usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/../../../../arm-none-linux-gnueabi/include/bits/wordsize.h:
 
-/usr/include/gnu/stubs-32.h:
+/usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/../../../../arm-none-linux-gnueabi/include/gnu/stubs.h:
 
-/usr/include/bits/posix1_lim.h:
+/usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/../../../../arm-none-linux-gnueabi/include/bits/posix1_lim.h:
 
-/usr/include/bits/local_lim.h:
+/usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/../../../../arm-none-linux-gnueabi/include/bits/local_lim.h:
 
-/usr/include/linux/limits.h:
+/usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/../../../../arm-none-linux-gnueabi/include/linux/limits.h:
 
-/usr/include/bits/posix2_lim.h:
+/usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/../../../../arm-none-linux-gnueabi/include/bits/posix2_lim.h:
 
-/usr/lib/gcc/i686-redhat-linux/4.4.7/include/stddef.h:
+/usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/include/stddef.h:
 
 include/lzo/lzodefs.h:
 
-/usr/include/string.h:
+/usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/../../../../arm-none-linux-gnueabi/include/string.h:
 
-/usr/include/xlocale.h:
+/usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/../../../../arm-none-linux-gnueabi/include/bits/string.h:
 
-/usr/include/bits/string.h:
+/usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/../../../../arm-none-linux-gnueabi/include/bits/string2.h:
 
-/usr/include/bits/string2.h:
-
-/usr/include/endian.h:
-
-/usr/include/bits/endian.h:
-
-/usr/include/bits/byteswap.h:
-
-/usr/include/bits/types.h:
-
-/usr/include/bits/typesizes.h:
-
-/usr/include/stdlib.h:
+/usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/../../../../arm-none-linux-gnueabi/include/stdlib.h:
 
 src/lzo_supp.h:
 
-/usr/include/assert.h:
+/usr/local/arm_linux_4.3.2/lib/gcc/arm-none-linux-gnueabi/4.3.2/../../../../arm-none-linux-gnueabi/include/assert.h:
 
 src/lzo_func.h:
 

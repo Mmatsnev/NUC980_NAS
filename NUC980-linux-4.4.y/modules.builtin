@@ -45,6 +45,7 @@ kernel/drivers/crypto/nuc980-crypto.ko
 kernel/drivers/crypto/nuc980-crypto-raw.ko
 kernel/drivers/dma/dmatest.ko
 kernel/drivers/gpio/gpio-nuc980.ko
+kernel/drivers/gpio_module/TS_GPIO.ko
 kernel/drivers/hid/hid.ko
 kernel/drivers/hid/hid-a4tech.ko
 kernel/drivers/hid/hid-apple.ko

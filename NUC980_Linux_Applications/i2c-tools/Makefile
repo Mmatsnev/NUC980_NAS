@@ -8,8 +8,7 @@
 # (at your option) any later version.
 
 DESTDIR	=
-#prefix	= /usr/local
-prefix	= /home/ryan/NUC980_ALL/i2c_test
+prefix	= /usr/local
 bindir	= $(prefix)/bin
 sbindir	= $(prefix)/sbin
 mandir	= $(prefix)/share/man
