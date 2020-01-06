@@ -419,28 +419,28 @@ static struct nuvoton_vin_sensor cap0_mxl241 = {
 	.name = "cap0_mxl241",
 	.init = &cap0_mxl241_init,
 	.infmtord = (INORD_YUYV | INFMT_RGB565 | INTYPE_CCIR601),
-	.polarity = (VSP_LO | HSP_LO | PCLKP_LO),
+	.polarity = (VSP_LO | HSP_HI | PCLKP_LO),
 	.cropstart = ( 0 | 0<<16 ), /*( Vertical | Horizontal<<16 ) */
 	.cropcap = {
 		.bounds = {
 			.left = 0,
 			.top = 0,
-			.width = 640,
-			.height = 480,
+			.width = 320,//.width = 640,
+			.height = 240,//.height = 480,
 		},
 		.defrect = {
 			.left = 0,
 			.top = 0,
-			.width = 800,
-			.height = 480,
+			.width = 400,//800,
+			.height = 240,//480,
 		},
 	},
 	.pix_format  = {
-		.width = 640,
-		.height = 480,
+		.width = 320,//640,
+		.height = 240,//480,
 		.pixelformat = V4L2_PIX_FMT_GREY,//V4L2_PIX_FMT_YUYV,
 		.priv = 16,
-		.colorspace = V4L2_COLORSPACE_JPEG,
+		.colorspace = V4L2_COLORSPACE_RAW ,//V4L2_COLORSPACE_JPEG,
 	},
 };
 
@@ -457,15 +457,15 @@ int nuvoton_vin0_probe_mxl241(struct nuvoton_vin_device* cam)
 		return -1;
 
 	printk("Mxl241 initialization...\n");
-	
+
 	Mxl241_Init();
-	
+
 	printk("Mxl241 initialization successful!\n");
 
 	printk("Mxl241 tunner to 235MHz!\n");
-	
+
 	Mxl241_tune_channel(235, 6875, 64);
-	
+
 	printk("Mxl241 tunner successful!\n");
 
 	//----------Read sensor id-------------------------------------

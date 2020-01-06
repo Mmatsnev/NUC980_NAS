@@ -392,7 +392,7 @@ int spi_bitbang_start(struct spi_bitbang *bitbang)
 	if (ret)
 		spi_master_put(master);
 
-	return 0;
+	return ret;
 }
 EXPORT_SYMBOL_GPL(spi_bitbang_start);
 
@@ -406,4 +406,3 @@ void spi_bitbang_stop(struct spi_bitbang *bitbang)
 EXPORT_SYMBOL_GPL(spi_bitbang_stop);
 
 MODULE_LICENSE("GPL");
-

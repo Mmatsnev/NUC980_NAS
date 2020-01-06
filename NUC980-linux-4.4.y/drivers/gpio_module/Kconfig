@@ -1,4 +1,4 @@
-menu "TS_GPIO
+menu "TS_GPIO"
 comment "TS_GPIO Driver"
 config TS_GPIO
 tristate "TS_GPIO"

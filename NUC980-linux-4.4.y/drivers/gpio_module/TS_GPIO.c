@@ -32,6 +32,7 @@
 #define IOCTL_CAP_VH  _IOW (LED_MAGIC, 4, int)
 #define IOCTL_CAP_VL  _IOW (LED_MAGIC, 5, int)
 #define IOCTL_READ_REG _IOW (LED_MAGIC, 6, int)
+#define IOCTL_READ_DATA _IOW (LED_MAGIC, 7, int)
 /*
 由宏定义组成的一组32位数据
 bit31~bit30 2位为 “区别读写” 区，作用是区分是读取命令还是写入命令。
@@ -134,7 +135,6 @@ static long TS_GPIO_IOCTL( struct file *files, unsigned int cmd, unsigned long a
 		}
 		case IOCTL_READ_REG:
 		{
-		    printk("REG_MFP_GPC_L=0x%08x\n",__raw_readl(REG_MFP_GPC_L));
             printk("GCR_BA+0x080=0x%08x\n",__raw_readl(GCR_BA+0x080));
             printk("GCR_BA+0x084=0x%08x\n",__raw_readl(GCR_BA+0x084));
             printk("CLK_HCLKEN=0x%08x\n",__raw_readl(CLK_BA+0x010));
@@ -142,14 +142,28 @@ static long TS_GPIO_IOCTL( struct file *files, unsigned int cmd, unsigned long a
             printk("VDIN0 ISR status=0x%08x\n",__raw_readl(REG_CAP0_INT));
             printk("REG_CAP0_CTL=0x%08x\n",__raw_readl(REG_CAP0_CTL));
             printk("REG_CAP0_PAR=0x%08x\n",__raw_readl(REG_CAP0_PAR));
+            printk("REG_CAP0_CWSP=0x%08x\n",__raw_readl(REG_CAP0_CWSP));
+            printk("REG_CAP0_CWS=0x%08x\n",__raw_readl(REG_CAP0_CWS));
+            printk("REG_CAP0_PKTSM=0x%08x\n",__raw_readl(REG_CAP0_PKTSM));
+            printk("REG_CAP0_PKTSL=0x%08x\n",__raw_readl(REG_CAP0_PKTSL));
             printk("REG_CAP0_MD=0x%08x\n",__raw_readl(REG_CAP0_MD));
-            printk("REG_CAP0_CURADDRY=0x%08x\n",__raw_readl(REG_CAP0_CURADDRY));
-            printk("REG_CAP0_CURADDRU=0x%08x\n",__raw_readl(REG_CAP0_CURADDRU));
-            printk("REG_CAP0_CURADDRV=0x%08x\n",__raw_readl(REG_CAP0_CURADDRV));
-            printk("REG_CAP0_YBA=0x%08x\n",__raw_readl(REG_CAP0_YBA));
-            printk("REG_CAP0_UBA=0x%08x\n",__raw_readl(REG_CAP0_UBA));
-            printk("REG_CAP0_VBA=0x%08x\n",__raw_readl(REG_CAP0_VBA));
+            printk("REG_CAP0_FIFOTH=0x%08x\n",__raw_readl(REG_CAP0_FIFOTH));
+            printk("REG_CAP0_FRCTL=0x%08x\n",__raw_readl(REG_CAP0_FRCTL));
+            printk("REG_CAP0_CURADDRP=0x%08x\n",__raw_readl(REG_CAP0_CURADDRP));
+//            printk("REG_CAP0_CURADDRY=0x%08x\n",__raw_readl(REG_CAP0_CURADDRY));
+//            printk("REG_CAP0_CURADDRU=0x%08x\n",__raw_readl(REG_CAP0_CURADDRU));
+//            printk("REG_CAP0_CURADDRV=0x%08x\n",__raw_readl(REG_CAP0_CURADDRV));
+//            printk("REG_CAP0_YBA=0x%08x\n",__raw_readl(REG_CAP0_YBA));
+//            printk("REG_CAP0_UBA=0x%08x\n",__raw_readl(REG_CAP0_UBA));
+//            printk("REG_CAP0_VBA=0x%08x\n",__raw_readl(REG_CAP0_VBA));
+            printk("REG_CAP0_PKTBA0=0x%08x\n",__raw_readl(REG_CAP0_PKTBA0));
+            break;
 		}
+//		case IOCTL_READ_DATA:
+//		{
+//            printk("REG_CAP0_PKTBA0_DATA=0x%08x\n",__raw_readl((void *)(__raw_readl(REG_CAP0_PKTBA0))));
+//            break;
+//		}
 		default:
 			break;
 	}
