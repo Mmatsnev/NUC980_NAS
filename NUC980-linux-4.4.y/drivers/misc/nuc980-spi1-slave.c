@@ -18,9 +18,11 @@
 #include <linux/clk.h>
 #include <linux/device.h>
 #include <linux/platform_device.h>
+#include <linux/miscdevice.h>
 #include <linux/gpio.h>
 #include <linux/io.h>
 #include <linux/slab.h>
+#include <linux/uaccess.h>
 
 #include <linux/spi/spi.h>
 #include <linux/spi/spi_bitbang.h>
@@ -145,6 +147,14 @@ struct nuc980_spi {
 	struct resource		*res;
 };
 
+struct TS_DTMB_SPI_DATA {
+
+    struct mutex lock;
+    struct miscdevice ts_dtmb_misc;
+};
+
+struct TS_DTMB_SPI_DATA *ts_dtmb_data_dev;
+
 //dma callback function
 static void spi1_nuc980_slave_dma_callback(void *arg)
 {
@@ -238,17 +248,13 @@ static int nuc980_spi1_txrx(struct nuc980_spi *hw, struct ts_spi_slave *t)
 	struct nuc980_dma_config dma_crx,dma_ctx;
 	dma_cookie_t            cookie;
 
-    printk("nuc980_spi1_txrx line 233\n");
-
 	__raw_writel(__raw_readl(hw->regs + REG_FIFOCTL) | 0x3, hw->regs + REG_FIFOCTL); //CWWeng : RXRST & TXRST
 	while (__raw_readl(hw->regs + REG_STATUS) & (1<<23)); //TXRXRST
 
 	__raw_writel(__raw_readl(hw->regs + REG_PDMACTL)&~(0x3), hw->regs + REG_PDMACTL); //Disable SPIx TX/RX PDMA
 
-    printk("nuc980_spi1_txrx line 241\n");
 
 	if (t->rx_buf) {
-        printk("nuc980_spi1_txrx line 244\n");
 		/* prepare the RX dma transfer */
 		sg_init_table(&pdma->sgrx, 1);
 		pdma->slave_config.src_addr = SPIx_RX;
@@ -360,14 +366,14 @@ static int nuc980_spi1_txrx(struct nuc980_spi *hw, struct ts_spi_slave *t)
 	wait_event_interruptible(spi1_slave_done, (spi1_slave_done_state != 0));
 	spi1_slave_done_state=0;
 
-    int p_num;
-    for(p_num = 0;p_num < 188;p_num++)
-    {
-        if(p_num % 10 == 0)
-            printk("[0x%02x] \n", *(t->rx_buf + p_num));
-        else
-            printk("[0x%02x] \n", *(t->rx_buf + p_num));
-    }
+//    int p_num;
+//    for(p_num = 0;p_num < 188;p_num++)
+//    {
+//        if(p_num % 10 == 0)
+//            printk("[0x%02x] \n", *(t->rx_buf + p_num));
+//        else
+//            printk("[0x%02x] \n", *(t->rx_buf + p_num));
+//    }
 	while(__raw_readl(hw->regs + REG_STATUS) & 1); //wait busy
 
 	/* unmap buffers if mapped above */
@@ -913,13 +919,49 @@ static struct nuc980_spi_info *nuc980_spi1_parse_dt(struct device *dev) {
 //
 //	return 0;
 //}
+ struct ts_spi_slave	*t  ;
+ struct nuc980_spi *hw;
+
+static int TS_DTMB_SPI_open(struct inode *inode, struct file *file)
+{
+    printk(KERN_EMERG "TS_DTMB_SPI open\n");
+    return 0;
+}
+
+static int TS_DTMB_SPI_release(struct inode *inode, struct file *file)
+{
+    printk(KERN_EMERG "TS_DTMB_SPI release\n");
+    return 0;
+}
+
+static int TS_DTMB_SPI_read(struct file *filp, char __user *buf, size_t count, loff_t *fops)
+{
+    //printk(KERN_EMERG "TS_DTMB_SPI read\n");
+
+    nuc980_spi1_txrx(hw, t);
+
+    if(copy_to_user(buf,t->rx_buf,count))
+	{
+		return -EFAULT;
+	}
+
+    return 0;
+}
+/*ops结构体，存储相关的操作函数*/
+static struct file_operations TS_DTMB_SPI_ops = {
+    .owner					= THIS_MODULE,
+    .open					= TS_DTMB_SPI_open,
+    .release				= TS_DTMB_SPI_release,
+    .read                   = TS_DTMB_SPI_read,
+
+};
+
 
 static int nuc980_spi1_slave_probe(struct platform_device *pdev)
 {
     struct nuc980_ip_dma *pdma=&dma;
 	dma_cap_mask_t mask;
 
-	struct nuc980_spi *hw;
 	struct spi_master *master;
 	int err = 0;
 	struct pinctrl *p;
@@ -979,7 +1021,6 @@ static int nuc980_spi1_slave_probe(struct platform_device *pdev)
 	hw->bitbang.setup_transfer = nuc980_spi1_setupxfer;
 	hw->bitbang.chipselect     = nuc980_spi1_chipsel;
 	hw->bitbang.master->setup  = nuc980_spi1_setup;
-    hw->bitbang.txrx_bufs      = nuc980_spi1_txrx;
 
 //    nuc980_spi1_setupxfer(hw->curdev);
 //    nuc980_spi1_chipsel(hw->curdev);
@@ -1109,8 +1150,6 @@ static int nuc980_spi1_slave_probe(struct platform_device *pdev)
 
 //    kthread_run(SPI1_Slave_Thread_TXRX, hw, "SPI1_SLAVE_THread_TXRX");
 
-    struct ts_spi_slave	*t  ;
-
     t = kzalloc(sizeof(*t), GFP_KERNEL);
 	if (!t)
 	{
@@ -1132,10 +1171,22 @@ static int nuc980_spi1_slave_probe(struct platform_device *pdev)
 
     t->len		= 188;
 
-    while(1)
-    {
-        nuc980_spi1_txrx(hw, t);
-    }
+    ts_dtmb_data_dev = kzalloc(sizeof(struct TS_DTMB_SPI_DATA), GFP_KERNEL);
+	if (!ts_dtmb_data_dev)
+		return -ENOMEM;
+
+    mutex_init(&ts_dtmb_data_dev->lock);
+
+    ts_dtmb_data_dev->ts_dtmb_misc.fops = &TS_DTMB_SPI_ops;
+    ts_dtmb_data_dev->ts_dtmb_misc.minor = 199;
+    ts_dtmb_data_dev->ts_dtmb_misc.name = "TS_STMB_SPI";
+    misc_register(&ts_dtmb_data_dev->ts_dtmb_misc);
+
+
+//    while(1)
+//    {
+//        nuc980_spi1_txrx(hw, t);
+//    }
 
 //    err = spi_bitbang_start(&hw->bitbang);
 //	if (err) {
@@ -1185,6 +1236,8 @@ static int nuc980_spi1_slave_remove(struct platform_device *dev)
 #endif
 
 	spi_master_put(hw->master);
+
+	misc_deregister(&ts_dtmb_data_dev->ts_dtmb_misc);
 	return 0;
 }
 

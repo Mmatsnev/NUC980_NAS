@@ -107,17 +107,15 @@ UINT8 Mxl241_Init(void)
 
   // 7. MPEG out setting
   MxL241SF_MpegOut.I2cSlaveAddr = MXL241_CHIP_ADRRESS;//96;
-  MxL241SF_MpegOut.SerialOrPar = MPEG_DATA_PARALLEL;
-  MxL241SF_MpegOut.MpegValidPol = MPEG_ACTIVE_HIGH;//MPEG_CLK_IN_PHASE;//;
-#ifdef BISS
-  MxL241SF_MpegOut.MpegClkPol = MPEG_CLK_NEGATIVE;//MPEG_CLK_NEGATIVE;//
-#else
+  MxL241SF_MpegOut.SerialOrPar = MPEG_DATA_SERIAL;//MPEG_DATA_PARALLEL;
+  MxL241SF_MpegOut.MpegValidPol = MPEG_ACTIVE_LOW;//MPEG_ACTIVE_HIGH;//MPEG_CLK_IN_PHASE;//;
   MxL241SF_MpegOut.MpegClkPol = MPEG_CLK_POSITIVE;//MPEG_CLK_NEGATIVE;//
-#endif
+
   MxL241SF_MpegOut.MpegSyncPol = MPEG_ACTIVE_HIGH;//MPEG_CLK_IN_PHASE;//;
-  MxL241SF_MpegOut.MpegClkFreq = MPEG_CLK_7_125MHz;
-  MxL241SF_MpegOut.MpegClkSource = MPEG_CLK_INTERNAL;
- // MxL241SF_MpegOut.MpegSyncPulseWidth=MPEG_SYNC_WIDTH_BIT;
+  MxL241SF_MpegOut.MpegClkFreq = MPEG_CLK_57MHz;//MPEG_CLK_28_5MHz;//MPEG_CLK_7_125MHz;
+  MxL241SF_MpegOut.MpegClkSource = MPEG_CLK_EXTERNAL;//MPEG_CLK_INTERNAL;
+  MxL241SF_MpegOut.MpegSyncPulseWidth=MPEG_SYNC_WIDTH_BIT;
+  MxL241SF_MpegOut.LsbOrMsbFirst = MPEG_SERIAL_LSB_1ST;
   MxLWare_API_ConfigDemod(MXL_DEMOD_MPEG_OUT_CFG, (void*)&MxL241SF_MpegOut);
 
   delay_ms(1);
