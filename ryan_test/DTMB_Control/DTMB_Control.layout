@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="Debug" />
+	<File name="m88dd3k/fe_dd3k_def.h" open="0" top="0" tabpos="0">
+		<Cursor position="3627" topLine="118" />
+	</File>
+	<File name="m88dd3k/fe_dd3k_i2c.c" open="1" top="0" tabpos="5">
+		<Cursor position="1749" topLine="25" />
+	</File>
+	<File name="m88dd3k/m88dd3k.c" open="1" top="0" tabpos="3">
+		<Cursor position="286" topLine="6" />
+	</File>
+	<File name="m88dd3k/m88dd3k.h" open="1" top="0" tabpos="2">
+		<Cursor position="586" topLine="5" />
+	</File>
+	<File name="m88dd3k/main.c" open="1" top="0" tabpos="1">
+		<Cursor position="1185" topLine="42" />
+	</File>
+	<File name="m88dd3k/mt_fe_common.h" open="0" top="0" tabpos="9">
+		<Cursor position="2605" topLine="72" />
+	</File>
+	<File name="m88dd3k/mt_fe_dmd_dd3k.c" open="1" top="0" tabpos="6">
+		<Cursor position="13121" topLine="385" />
+	</File>
+	<File name="m88dd3k/mt_fe_tn_tc6800.c" open="0" top="0" tabpos="8">
+		<Cursor position="2898" topLine="39" />
+	</File>
+	<File name="m88dd3k/mt_fe_tn_tc6800.h" open="1" top="0" tabpos="4">
+		<Cursor position="2041" topLine="50" />
+	</File>
+</CodeBlocks_layout_file>

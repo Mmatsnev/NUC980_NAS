@@ -686,7 +686,8 @@ ENTRY();
 
 	val = __raw_readl(hw->regs + REG_SSCTL);
 
-	val |= SSINAIEN; /* enable SSINAIEN */
+	//val |= SSINAIEN; /* enable SSINAIEN */
+	val |= SSACTIF;
 
 	__raw_writel(val, hw->regs + REG_SSCTL);
 
@@ -773,7 +774,7 @@ static void nuc980_init_spi(struct nuc980_spi *hw)
 	nuc980_set_divider(hw);
 	nuc980_enable_slave(hw);
 //	nuc980_enable_rxth_int(hw);
-//	nuc980_enable_ssinact_int(hw);
+	nuc980_enable_ssinact_int(hw);
 	LEAVE();
 }
 
@@ -1026,13 +1027,12 @@ static int nuc980_spi1_slave_probe(struct platform_device *pdev)
 //    nuc980_spi1_chipsel(hw->curdev);
 //    nuc980_spi1_setup(hw->curdev);
 
-    hw->pdata->clkpol = 1;
+    hw->pdata->clkpol = 0;
     hw->pdata->txneg = 1;
     hw->pdata->rxneg = 0;
-
 	//spimode = spi->mode & 0xff; //remove dual/quad bit
-
 	hw->pdata->lsb = 1;
+
 
 
 	hw->res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
@@ -1133,22 +1133,22 @@ static int nuc980_spi1_slave_probe(struct platform_device *pdev)
 
 
 
-    printk("SPI1_CTL = [0x%08x] \n", __raw_readl(hw->regs + REG_CTL));
-    printk("SPI1_CLKDIV = [0x%08x] \n", __raw_readl(hw->regs + REG_CLKDIV));
-    printk("SPI1_SSCTL = [0x%08x] \n", __raw_readl(hw->regs + REG_SSCTL));
-    printk("SPI1_PDMACTL = [0x%08x] \n", __raw_readl(hw->regs + REG_PDMACTL));
-    printk("SPI1_FIFOCTL = [0x%08x] \n", __raw_readl(hw->regs + REG_FIFOCTL));
-    printk("SPI1_STATUS = [0x%08x] \n", __raw_readl(hw->regs + REG_STATUS));
-    printk("SPI1_TX = [0x%08x] \n", __raw_readl(hw->regs + REG_TX));
-    printk("SPI1_RX = [0x%08x] \n", __raw_readl(hw->regs + REG_RX));
+//    printk("SPI1_CTL = [0x%08x] \n", __raw_readl(hw->regs + REG_CTL));
+//    printk("SPI1_CLKDIV = [0x%08x] \n", __raw_readl(hw->regs + REG_CLKDIV));
+//    printk("SPI1_SSCTL = [0x%08x] \n", __raw_readl(hw->regs + REG_SSCTL));
+//    printk("SPI1_PDMACTL = [0x%08x] \n", __raw_readl(hw->regs + REG_PDMACTL));
+//    printk("SPI1_FIFOCTL = [0x%08x] \n", __raw_readl(hw->regs + REG_FIFOCTL));
+//    printk("SPI1_STATUS = [0x%08x] \n", __raw_readl(hw->regs + REG_STATUS));
+//    printk("SPI1_TX = [0x%08x] \n", __raw_readl(hw->regs + REG_TX));
+//    printk("SPI1_RX = [0x%08x] \n", __raw_readl(hw->regs + REG_RX));
+//
+//    printk("CLK_HCLKEN=0x%08x\n",__raw_readl(CLK_BA + 0x010));
+//    printk("REG_CLK_DIV0=0x%08x\n",__raw_readl(CLK_BA + 0x020));
+//    printk("REG_CLK_DIV2=0x%08x\n",__raw_readl(CLK_BA + 0x028));
+//    printk("REG_CLK_APLLCON=0x%08x\n",__raw_readl(CLK_BA + 0x060));
+//    printk("REG_CLK_UPLLCON=0x%08x\n",__raw_readl(CLK_BA + 0x064));
 
-    printk("CLK_HCLKEN=0x%08x\n",__raw_readl(CLK_BA + 0x010));
-    printk("REG_CLK_DIV0=0x%08x\n",__raw_readl(CLK_BA + 0x020));
-    printk("REG_CLK_DIV2=0x%08x\n",__raw_readl(CLK_BA + 0x028));
-    printk("REG_CLK_APLLCON=0x%08x\n",__raw_readl(CLK_BA + 0x060));
-    printk("REG_CLK_UPLLCON=0x%08x\n",__raw_readl(CLK_BA + 0x064));
-
-//    kthread_run(SPI1_Slave_Thread_TXRX, hw, "SPI1_SLAVE_THread_TXRX");
+////    kthread_run(SPI1_Slave_Thread_TXRX, hw, "SPI1_SLAVE_THread_TXRX");
 
     t = kzalloc(sizeof(*t), GFP_KERNEL);
 	if (!t)
@@ -1179,7 +1179,7 @@ static int nuc980_spi1_slave_probe(struct platform_device *pdev)
 
     ts_dtmb_data_dev->ts_dtmb_misc.fops = &TS_DTMB_SPI_ops;
     ts_dtmb_data_dev->ts_dtmb_misc.minor = 199;
-    ts_dtmb_data_dev->ts_dtmb_misc.name = "TS_STMB_SPI";
+    ts_dtmb_data_dev->ts_dtmb_misc.name = "TS_DTMB_SPI";
     misc_register(&ts_dtmb_data_dev->ts_dtmb_misc);
 
 

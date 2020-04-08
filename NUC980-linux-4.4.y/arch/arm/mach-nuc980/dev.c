@@ -1668,8 +1668,8 @@ static struct i2c_board_info __initdata nuc980_i2c_clients4[] = {
 };
 
 static struct i2c_gpio_platform_data i2c_gpio_adapter_data = {
-	.sda_pin = NUC980_PB0,
-	.scl_pin = NUC980_PB2,
+	.sda_pin = NUC980_PB7,
+	.scl_pin = NUC980_PB8,
 	.udelay = 1,
 	.timeout = 100,
 	.sda_is_open_drain = 0,	//not support open drain mode

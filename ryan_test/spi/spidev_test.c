@@ -27,7 +27,7 @@ static void pabort(const char *s)
 	perror(s);
 	abort();
 }
-static const char *device = "/dev/TS_STMB_SPI";//"/dev/spidev0.1";
+static const char *device = "/dev/TS_DTMB_SPI";//"/dev/spidev0.1";
 static uint32_t mode;
 static uint8_t bits = 8;
 static uint32_t speed = 500000;
